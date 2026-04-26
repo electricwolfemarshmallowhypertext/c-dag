@@ -363,15 +363,7 @@ Included examples:
 
 This project is licensed under the Business Source License 1.1.
 
-The source code is available for review, learning, testing, and non-production use. Commercial production use requires written permission from the licensor.
-
-Available commercial paths:
-
-- **Evaluation pilot:** limited internal evaluation, non-production use only.
-- **Paid commercial license:** required for production deployment, customer-facing use, regulated workflow use, or integration into commercial software.
-- **Support boundary:** commercial support can include integration guidance, deployment review, configuration review, audit-output review, and governance documentation support. It does not include legal advice, credit-policy approval, or certified regulatory compliance.
-
-For commercial licensing, contact: smith@antiparty.co
+The source code is available for review, learning, testing, and non-production use. Commercial production use requires written permission from the Licensor.
 
 License terms:
 
@@ -386,12 +378,12 @@ This means the project is source-available now and converts to Apache-2.0 on the
 
 ## Commercial licensing
 
-Commercial production use requires written permission.
+Commercial production use requires written permission from the Licensor.
 
 Available commercial paths:
 
 - **Evaluation pilot:** limited internal evaluation, non-production use only.
 - **Paid commercial license:** required for production deployment, customer-facing use, regulated workflow use, or integration into commercial software.
-- **Support boundary:** commercial support can include integration guidance, deployment review, configuration review, audit-output review, and governance documentation support. It does not include legal advice, credit-policy approval, or certified regulatory compliance.
+- **Support boundary:** commercial support can include integration guidance, deployment review, configuration review, audit-output review, and governance documentation support. It does not include legal advice, credit-policy approval, fairness certification, adverse-action review, or certified regulatory compliance.
 
 For commercial licensing, contact: smith@antiparty.co
