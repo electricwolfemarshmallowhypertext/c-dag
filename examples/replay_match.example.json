@@ -1,0 +1,25 @@
+{
+  "original_decision_id": "a98dc6a7-6c4d-402c-a44e-9f84d5324d54",
+  "replayed_decision_id": "8930f528-16be-4044-9ed9-fd5be5a93605",
+  "tenant_id": "default",
+  "model_id": "credit_risk_causal_dag",
+  "model_version": "1.0.0",
+  "policy_version": "1.0.0",
+  "input_evidence": {
+    "tenure": "short",
+    "utilization": "high"
+  },
+  "original_risk_probability": 0.849375,
+  "replayed_risk_probability": 0.849375,
+  "risk_probability_match": true,
+  "original_decision": "DECLINE",
+  "replayed_decision": "DECLINE",
+  "decision_match": true,
+  "audit_chain": {
+    "chain_index": 0,
+    "timestamp_utc": "2026-04-26T02:11:18+00:00",
+    "previous_hash": null,
+    "audit_hash": "3f0f3f4974166c8eec6db5983ccb903c2d46c836359c4e5032efc5b68546b9ec",
+    "tenant_id": "default"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "model_id": "credit_risk_causal_dag",
+  "model_version": "1.0.0",
+  "description": "Toy-sized but production-shaped causal DAG for explainability demos.",
+  "nodes": [
+    {
+      "node_id": "tenure",
+      "human_label": "Employment Tenure",
+      "states": ["short", "long"],
+      "parents": [],
+      "mechanism_description": "Prior distribution over customer employment tenure.",
+      "node_type": "observed"
+    },
+    {
+      "node_id": "income",
+      "human_label": "Income Stability",
+      "states": ["unstable", "stable"],
+      "parents": ["tenure"],
+      "mechanism_description": "Income stability is causally influenced by employment tenure.",
+      "node_type": "inferred"
+    },
+    {
+      "node_id": "dsc",
+      "human_label": "Debt Service Coverage",
+      "states": ["below_threshold", "above_threshold"],
+      "parents": ["income"],
+      "mechanism_description": "Debt service coverage follows from income stability state.",
+      "node_type": "inferred"
+    },
+    {
+      "node_id": "utilization",
+      "human_label": "Credit Utilization",
+      "states": ["high", "low"],
+      "parents": [],
+      "mechanism_description": "Observed utilization prior for demonstration population.",
+      "node_type": "observed"
+    },
+    {
+      "node_id": "risk",
+      "human_label": "Default Risk Tier",
+      "states": ["high_risk", "low_risk"],
+      "parents": ["dsc", "utilization"],
+      "mechanism_description": "Outcome risk level driven by debt service coverage and utilization.",
+      "node_type": "outcome"
+    }
+  ],
+  "cpds": {
+    "tenure": {
+      "parents": [],
+      "outcomes": ["short", "long"],
+      "table": [0.4, 0.6]
+    },
+    "income": {
+      "parents": ["tenure"],
+      "outcomes": ["unstable", "stable"],
+      "table": [
+        [0.75, 0.2],
+        [0.25, 0.8]
+      ]
+    },
+    "dsc": {
+      "parents": ["income"],
+      "outcomes": ["below_threshold", "above_threshold"],
+      "table": [
+        [0.85, 0.3],
+        [0.15, 0.7]
+      ]
+    },
+    "utilization": {
+      "parents": [],
+      "outcomes": ["high", "low"],
+      "table": [0.45, 0.55]
+    },
+    "risk": {
+      "parents": ["dsc", "utilization"],
+      "outcomes": ["high_risk", "low_risk"],
+      "table": [
+        [
+          [0.95, 0.75],
+          [0.6, 0.25]
+        ],
+        [
+          [0.05, 0.25],
+          [0.4, 0.75]
+        ]
+      ]
+    }
+  }
+}

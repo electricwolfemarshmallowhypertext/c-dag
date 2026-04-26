@@ -1,0 +1,18 @@
+{
+  "rows": [
+    {
+      "segment": "A",
+      "decision": "DECLINE",
+      "risk_probability": 0.849375,
+      "tenant_id": "default"
+    },
+    {
+      "segment": "B",
+      "decision": "REVIEW",
+      "risk_probability": 0.455,
+      "tenant_id": "default"
+    }
+  ],
+  "subgroup_column": "segment",
+  "min_sample_size": 2
+}

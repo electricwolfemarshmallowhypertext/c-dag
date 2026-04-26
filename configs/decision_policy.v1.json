@@ -1,0 +1,9 @@
+{
+  "policy_id": "credit_risk_demo_policy",
+  "policy_version": "1.0.0",
+  "decline_threshold": 0.5,
+  "manual_review_lower": 0.35,
+  "manual_review_upper": 0.5,
+  "risk_outcome_node": "risk",
+  "high_risk_state": "high_risk"
+}

@@ -1,0 +1,16 @@
+{
+  "detail": [
+    {
+      "type": "dict_type",
+      "loc": [
+        "body"
+      ],
+      "msg": "Input should be a valid dictionary",
+      "input": [
+        "not",
+        "an",
+        "object"
+      ]
+    }
+  ]
+}

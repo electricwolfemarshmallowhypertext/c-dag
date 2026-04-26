@@ -1,0 +1,56 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Build/distribution
+build/
+dist/
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local env files
+.env
+.env.local
+
+# Local outputs and temporary artifacts
+outputs/
+outputs/demo/
+outputs/evidence_pack_*/
+*.tmp
+*.bak
+*_out.csv
+*_output.csv
+*_out.json
+*.local.csv
+*.local.json
+*.log
+*.sqlite
+*.db
+coverage.xml
+
+# IDE/editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

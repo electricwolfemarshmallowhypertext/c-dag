@@ -1,0 +1,108 @@
+{
+  "decision_id": "example-decision-0001",
+  "tenant_id": "default",
+  "model_id": "credit_risk_causal_dag",
+  "model_version": "1.0.0",
+  "policy_version": "1.0.0",
+  "timestamp_utc": "2026-04-26T00:00:00+00:00",
+  "input_evidence": {
+    "tenure": "short",
+    "utilization": "high"
+  },
+  "inferred_nodes": {
+    "income": {
+      "unstable": 0.75,
+      "stable": 0.25
+    },
+    "dsc": {
+      "below_threshold": 0.7125,
+      "above_threshold": 0.2875
+    }
+  },
+  "risk_probability": 0.849375,
+  "decision": "DECLINE",
+  "causal_chain": [
+    {
+      "node_id": "tenure",
+      "human_label": "Employment Tenure",
+      "node_type": "observed",
+      "source": "observed",
+      "state": "short"
+    },
+    {
+      "node_id": "utilization",
+      "human_label": "Credit Utilization",
+      "node_type": "observed",
+      "source": "observed",
+      "state": "high"
+    },
+    {
+      "node_id": "income",
+      "human_label": "Income Stability",
+      "node_type": "inferred",
+      "source": "inferred",
+      "most_likely_state": "unstable",
+      "p_adverse_state": 0.75
+    },
+    {
+      "node_id": "dsc",
+      "human_label": "Debt Service Coverage",
+      "node_type": "inferred",
+      "source": "inferred",
+      "most_likely_state": "below_threshold",
+      "p_adverse_state": 0.7125
+    },
+    {
+      "node_id": "risk",
+      "human_label": "Default Risk Tier",
+      "node_type": "outcome",
+      "source": "inferred",
+      "most_likely_state": "high_risk",
+      "p_adverse_state": 0.849375
+    }
+  ],
+  "counterfactuals": [
+    {
+      "baseline_evidence": {
+        "tenure": "short",
+        "utilization": "high"
+      },
+      "intervention_evidence": {
+        "tenure": "long"
+      },
+      "before_probability": 0.849375,
+      "after_probability": 0.7435,
+      "delta": -0.105875
+    },
+    {
+      "baseline_evidence": {
+        "tenure": "short",
+        "utilization": "high"
+      },
+      "intervention_evidence": {
+        "utilization": "low"
+      },
+      "before_probability": 0.849375,
+      "after_probability": 0.60625,
+      "delta": -0.243125
+    },
+    {
+      "baseline_evidence": {
+        "tenure": "short",
+        "utilization": "high"
+      },
+      "intervention_evidence": {
+        "tenure": "long",
+        "utilization": "low"
+      },
+      "before_probability": 0.849375,
+      "after_probability": 0.455,
+      "delta": -0.394375
+    }
+  ],
+  "validation_status": {
+    "model_valid": true,
+    "policy_valid": true,
+    "errors": []
+  }
+}

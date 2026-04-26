@@ -1,0 +1,33 @@
+{
+  "tenant_id": "default",
+  "subgroup_column": "segment",
+  "rows_received": 2,
+  "rows_analyzed": 2,
+  "rows_skipped": 0,
+  "subgroups": {
+    "A": {
+      "count": 1,
+      "approve_rate": 0.0,
+      "review_rate": 0.0,
+      "decline_rate": 1.0,
+      "mean_risk_probability": 0.849375
+    },
+    "B": {
+      "count": 1,
+      "approve_rate": 0.0,
+      "review_rate": 1.0,
+      "decline_rate": 0.0,
+      "mean_risk_probability": 0.455
+    }
+  },
+  "max_min_subgroup_delta": {
+    "mean_risk_probability_delta": 0.394375,
+    "approve_rate_delta": 0.0,
+    "decline_rate_delta": 1.0
+  },
+  "warnings": [
+    "Subgroup 'A' has small sample size (1 < 2).",
+    "Subgroup 'B' has small sample size (1 < 2)."
+  ],
+  "disclaimer": "Fairness diagnostics only; not fairness certification."
+}

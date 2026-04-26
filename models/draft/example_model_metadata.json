@@ -1,0 +1,15 @@
+﻿{
+  "model_id": "credit_risk_causal_dag",
+  "model_version": "1.1.0-draft",
+  "status": "draft",
+  "approver": "",
+  "approval_date": "",
+  "validation_dataset_reference": "pilot_dataset_v1",
+  "known_limitations": [
+    "Illustrative CPDs only",
+    "Not fairness certified"
+  ],
+  "change_reason": "Draft CPD estimation workflow trial",
+  "rollback_version": "1.0.0",
+  "created_at_utc": "2026-04-26T00:00:00+00:00"
+}
