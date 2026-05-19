@@ -1,0 +1,33 @@
+{
+  "dataset": "cfpb_consumer_complaints",
+  "description": "Expected normalized schema for public CFPB complaint-data validation.",
+  "required_columns": [
+    "source_dataset",
+    "source_record_id",
+    "tenant_id",
+    "product_risk",
+    "issue_complexity",
+    "company_response_quality",
+    "timely_response",
+    "consumer_disputed",
+    "escalation_risk",
+    "segment"
+  ],
+  "allowed_states": {
+    "product_risk": ["high_product_risk", "lower_product_risk"],
+    "issue_complexity": ["complex", "standard"],
+    "company_response_quality": ["poor", "adequate"],
+    "timely_response": ["untimely", "timely"],
+    "consumer_disputed": ["disputed", "not_disputed"],
+    "escalation_risk": ["high_escalation", "low_escalation"]
+  },
+  "optional_columns": [
+    "state",
+    "product",
+    "issue",
+    "company_response_to_consumer",
+    "timely_response_raw",
+    "consumer_disputed_raw",
+    "mapping_notes"
+  ]
+}

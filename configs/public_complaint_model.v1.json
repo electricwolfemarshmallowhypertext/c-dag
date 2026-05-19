@@ -1,0 +1,117 @@
+{
+  "model_id": "public_complaint_causal_dag",
+  "model_version": "1.0.0",
+  "description": "Public CFPB complaint-data validation model for escalation-governance explainability.",
+  "nodes": [
+    {
+      "node_id": "product_risk",
+      "human_label": "Product Risk",
+      "states": ["high_product_risk", "lower_product_risk"],
+      "parents": [],
+      "mechanism_description": "Observed product-level risk proxy from complaint product category.",
+      "node_type": "observed"
+    },
+    {
+      "node_id": "issue_complexity",
+      "human_label": "Issue Complexity",
+      "states": ["complex", "standard"],
+      "parents": [],
+      "mechanism_description": "Observed issue complexity proxy from issue/sub-issue/narrative signals.",
+      "node_type": "observed"
+    },
+    {
+      "node_id": "timely_response",
+      "human_label": "Timely Response",
+      "states": ["untimely", "timely"],
+      "parents": [],
+      "mechanism_description": "Observed timeliness of company response.",
+      "node_type": "observed"
+    },
+    {
+      "node_id": "consumer_disputed",
+      "human_label": "Consumer Disputed",
+      "states": ["disputed", "not_disputed"],
+      "parents": [],
+      "mechanism_description": "Observed dispute flag from complaint record.",
+      "node_type": "observed"
+    },
+    {
+      "node_id": "company_response_quality",
+      "human_label": "Company Response Quality",
+      "states": ["poor", "adequate"],
+      "parents": ["issue_complexity", "timely_response"],
+      "mechanism_description": "Company response quality influenced by issue complexity and response timeliness.",
+      "node_type": "inferred"
+    },
+    {
+      "node_id": "escalation_risk",
+      "human_label": "Escalation Risk",
+      "states": ["high_escalation", "low_escalation"],
+      "parents": ["company_response_quality", "consumer_disputed", "product_risk"],
+      "mechanism_description": "Escalation risk driven by response quality, dispute status, and product risk context.",
+      "node_type": "outcome"
+    }
+  ],
+  "cpds": {
+    "product_risk": {
+      "parents": [],
+      "outcomes": ["high_product_risk", "lower_product_risk"],
+      "table": [0.5, 0.5]
+    },
+    "issue_complexity": {
+      "parents": [],
+      "outcomes": ["complex", "standard"],
+      "table": [0.5, 0.5]
+    },
+    "timely_response": {
+      "parents": [],
+      "outcomes": ["untimely", "timely"],
+      "table": [0.15, 0.85]
+    },
+    "consumer_disputed": {
+      "parents": [],
+      "outcomes": ["disputed", "not_disputed"],
+      "table": [0.2, 0.8]
+    },
+    "company_response_quality": {
+      "parents": ["issue_complexity", "timely_response"],
+      "outcomes": ["poor", "adequate"],
+      "table": [
+        [
+          [0.8, 0.5],
+          [0.6, 0.2]
+        ],
+        [
+          [0.2, 0.5],
+          [0.4, 0.8]
+        ]
+      ]
+    },
+    "escalation_risk": {
+      "parents": ["company_response_quality", "consumer_disputed", "product_risk"],
+      "outcomes": ["high_escalation", "low_escalation"],
+      "table": [
+        [
+          [
+            [0.95, 0.9],
+            [0.8, 0.6]
+          ],
+          [
+            [0.75, 0.55],
+            [0.35, 0.15]
+          ]
+        ],
+        [
+          [
+            [0.05, 0.1],
+            [0.2, 0.4]
+          ],
+          [
+            [0.25, 0.45],
+            [0.65, 0.85]
+          ]
+        ]
+      ]
+    }
+  }
+}
