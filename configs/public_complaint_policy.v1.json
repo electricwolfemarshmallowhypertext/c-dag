@@ -1,0 +1,9 @@
+{
+  "policy_id": "public_cfpb_complaint_policy",
+  "policy_version": "1.0.0",
+  "decline_threshold": 0.05,
+  "manual_review_lower": 0.0145,
+  "manual_review_upper": 0.05,
+  "risk_outcome_node": "escalation_risk",
+  "high_risk_state": "high_escalation"
+}

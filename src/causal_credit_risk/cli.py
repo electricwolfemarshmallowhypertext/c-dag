@@ -67,7 +67,13 @@ def run_decision(
     engine = ExactInferenceEngine(model)
 
     baseline_evidence = dict(evidence or DEFAULT_EVIDENCE)
-    scenarios = list(intervention_scenarios or DEFAULT_COUNTERFACTUALS)
+    if intervention_scenarios is None:
+        if {"tenure", "utilization"}.issubset(set(model.nodes.keys())):
+            scenarios = list(DEFAULT_COUNTERFACTUALS)
+        else:
+            scenarios = []
+    else:
+        scenarios = list(intervention_scenarios)
 
     risk_probability = engine.query_probability(
         policy_config.risk_outcome_node,

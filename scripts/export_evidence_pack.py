@@ -20,6 +20,7 @@ from causal_credit_risk.audit_chain import build_audit_chain_record, verify_audi
 from causal_credit_risk.batch import run_batch_csv
 from causal_credit_risk.cli import run_decision
 from causal_credit_risk.fairness import compute_fairness_report
+from causal_credit_risk.model import CausalDAGModel
 from causal_credit_risk.registry import default_model_config_path, default_policy_config_path
 from causal_credit_risk.replay import replay_from_audit_payload
 
@@ -50,6 +51,10 @@ def export_evidence_pack(
 ) -> dict[str, Any]:
     model_path = model_config_path or default_model_config_path()
     policy_path = policy_config_path or default_policy_config_path()
+    model = CausalDAGModel.from_json(model_path)
+    observed_nodes = sorted(
+        node_id for node_id, node in model.nodes.items() if node.node_type == "observed"
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
 
     _progress("loading evidence-pack input")
@@ -97,12 +102,23 @@ def export_evidence_pack(
     chain_records: list[dict[str, Any]] = []
     previous_hash: str | None = None
     for index, row in enumerate(source_rows):
-        evidence = {k: v for k, v in row.items() if k in {"tenure", "utilization"}}
+        evidence = {
+            node_id: str(row.get(node_id, "")).strip()
+            for node_id in observed_nodes
+            if str(row.get(node_id, "")).strip() != ""
+        }
+        missing = [node_id for node_id in observed_nodes if node_id not in evidence]
+        if missing:
+            raise ValueError(
+                "Evidence-pack input is missing observed columns for model inference: "
+                + ", ".join(missing)
+            )
         tenant_id = str(row.get("tenant_id", "default")).strip() or "default"
         audit = run_decision(
             model_config_path=model_path,
             policy_config_path=policy_path,
             evidence=evidence,
+            intervention_scenarios=[{}],
             tenant_id=tenant_id,
         ).to_dict()
         chain_record = build_audit_chain_record(
