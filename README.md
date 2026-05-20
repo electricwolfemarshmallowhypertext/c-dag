@@ -7,7 +7,7 @@
 
 Config-driven causal inference engine for explainability experiments in credit-risk governance, counterfactuals, and audit traces.
 
-`causal-credit-risk-engine` is a production-style Python package for demonstrating how causal AI can support explainability, human oversight, decision traceability, and governance workflows in high-risk AI contexts.
+`causal-credit-risk-engine` is a production-shaped reference implementation for demonstrating how causal AI can support explainability, human oversight, decision traceability, and governance workflows in high-risk AI contexts.
 
 > Warning: Source-available under BUSL-1.1. Reference implementation only; not for lending, credit eligibility, or production decisioning.
 
@@ -63,8 +63,18 @@ This is public institutional loan-level validation, not production validation. I
 Run public validation:
 
 ```bash
-python scripts/run_public_mortgage_validation.py --input <normalized_csv> --model-config configs/public_mortgage_model.v1.json --policy-config configs/public_mortgage_policy.v1.json --use-model-config-as-is --max-audits 200
+python scripts/run_public_mortgage_validation.py --input NORMALIZED_CSV_PATH --model-config configs/public_mortgage_model.v1.json --policy-config configs/public_mortgage_policy.v1.json --use-model-config-as-is --max-audits 200
 ```
+
+Public complaint-data validation summary:
+
+- CFPB Consumer Complaint Database validation path
+- 10,000 real complaint rows processed
+- Decision distribution: APPROVE 0 | REVIEW 9,837 | DECLINE 163
+- Replay success rate: 1.0
+- Audit-chain verification: true
+
+This is public complaint-data validation, not production validation.
 
 ## Executive positioning
 
