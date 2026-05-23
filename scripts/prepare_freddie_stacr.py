@@ -36,6 +36,21 @@ CRT_NORMALIZED_COLUMNS: tuple[str, ...] = (
     "mapping_notes",
 )
 
+FREDDIE_LLD_90_FIELDS: list[str] = [f"col_{idx:02d}" for idx in range(1, 91)]
+FREDDIE_LLD_90_FIELDS[0] = "monthly_reporting_period"
+FREDDIE_LLD_90_FIELDS[1] = "dataset_id"
+FREDDIE_LLD_90_FIELDS[2] = "loan_sequence_number"
+FREDDIE_LLD_90_FIELDS[5] = "property_state"
+FREDDIE_LLD_90_FIELDS[16] = "loan_purpose"
+FREDDIE_LLD_90_FIELDS[22] = "credit_score"
+FREDDIE_LLD_90_FIELDS[23] = "original_loan_to_value"
+FREDDIE_LLD_90_FIELDS[24] = "original_combined_loan_to_value"
+FREDDIE_LLD_90_FIELDS[25] = "original_debt_to_income_ratio"
+FREDDIE_LLD_90_FIELDS[33] = "loan_age"
+FREDDIE_LLD_90_FIELDS[36] = "current_loan_delinquency_status"
+FREDDIE_LLD_90_FIELDS[42] = "zero_balance_code"
+FREDDIE_LLD_90_FIELDS[43] = "zero_balance_effective_date"
+
 
 def _detect_delimiter(header_line: str) -> str:
     return "|" if header_line.count("|") > header_line.count(",") else ","
@@ -66,6 +81,7 @@ def _read_rows(
     delimiter: str,
     encoding: str,
     zip_member: str | None,
+    has_header: bool,
 ) -> list[dict[str, str]]:
     text = _load_text(input_path, encoding=encoding, zip_member=zip_member)
     if not text.strip():
@@ -74,17 +90,29 @@ def _read_rows(
     first_line = next((line for line in text.splitlines() if line.strip()), "")
     parsed_delimiter = _detect_delimiter(first_line) if delimiter == "auto" else delimiter
 
-    reader = csv.DictReader(io.StringIO(text), delimiter=parsed_delimiter)
-    if reader.fieldnames is None:
-        raise ValueError(f"Input is missing a header row: {input_path}")
-
-    headers = [normalize_header(name) for name in reader.fieldnames]
     rows: list[dict[str, str]] = []
+    if has_header:
+        reader = csv.DictReader(io.StringIO(text), delimiter=parsed_delimiter)
+        if reader.fieldnames is None:
+            raise ValueError(f"Input is missing a header row: {input_path}")
+        headers = [normalize_header(name) for name in reader.fieldnames]
+        for raw in reader:
+            row = {
+                headers[idx]: str(value).strip()
+                for idx, value in enumerate(raw.values())
+                if idx < len(headers)
+            }
+            rows.append(row)
+        return rows
+
+    reader = csv.reader(io.StringIO(text), delimiter=parsed_delimiter)
+    headers = [normalize_header(name) for name in FREDDIE_LLD_90_FIELDS]
     for raw in reader:
+        if not raw or not "".join(raw).strip():
+            continue
         row = {
-            headers[idx]: str(value).strip()
-            for idx, value in enumerate(raw.values())
-            if idx < len(headers)
+            headers[idx]: raw[idx].strip() if idx < len(raw) else ""
+            for idx in range(len(headers))
         }
         rows.append(row)
     return rows
@@ -239,6 +267,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--encoding", default="utf-8-sig", help="Input text encoding.")
     parser.add_argument("--zip-member", default=None, help="Optional member name when --input points to a ZIP file.")
     parser.add_argument("--max-rows", type=int, default=None, help="Optional max rows to normalize.")
+    parser.add_argument(
+        "--has-header",
+        action="store_true",
+        help="Set if the STACR input file includes a header row.",
+    )
     return parser
 
 
@@ -252,6 +285,7 @@ def main() -> int:
         delimiter=args.delimiter,
         encoding=args.encoding,
         zip_member=args.zip_member,
+        has_header=args.has_header,
     )
 
     normalized: list[dict[str, str]] = []

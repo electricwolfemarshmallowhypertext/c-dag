@@ -81,6 +81,7 @@ def test_prepare_freddie_stacr_normalizes_rows() -> None:
                 str(output_csv),
                 "--max-rows",
                 "2",
+                "--has-header",
             ]
         )
         assert result.returncode == 0, result.stderr
