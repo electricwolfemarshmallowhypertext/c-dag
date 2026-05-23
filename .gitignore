@@ -34,6 +34,7 @@ outputs/
 outputs/demo/
 outputs/evidence_pack_*/
 validation/outputs/
+docs/new/
 examples/data/
 *.tmp
 *.bak

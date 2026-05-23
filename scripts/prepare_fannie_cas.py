@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import io
+from collections import defaultdict
 from pathlib import Path
 import sys
 import zipfile
@@ -214,6 +215,90 @@ def _normalize_row(row: dict[str, str], index: int) -> dict[str, str]:
     }
 
 
+def _normalize_profile_value(raw: str | None) -> float | None:
+    if raw is None:
+        return None
+    token = str(raw).strip()
+    if token == "":
+        return None
+    return to_float(token)
+
+
+def _normalize_profile_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    grouped: dict[str, dict[str, str]] = defaultdict(dict)
+    for row in rows:
+        cohort = str(row.get("cohort_selection_table", "")).strip()
+        measure = str(row.get("measure_names", "")).strip()
+        value = str(row.get("measure_values", "")).strip()
+        cancel_date = str(row.get("deal_cancel_date", "")).strip()
+        if cohort == "" or measure == "":
+            continue
+        grouped[cohort][measure] = value
+        if cancel_date:
+            grouped[cohort]["Deal Cancel Date"] = cancel_date
+
+    normalized: list[dict[str, str]] = []
+    for idx, (cohort, measures) in enumerate(sorted(grouped.items()), start=1):
+        wa_ltv = _normalize_profile_value(measures.get("WA LTV"))
+        wa_cltv = _normalize_profile_value(measures.get("WA CLTV"))
+        wa_fico = _normalize_profile_value(measures.get("WA FICO"))
+        wa_dti = _normalize_profile_value(measures.get("WA DTI"))
+        wa_risk_layers = _normalize_profile_value(measures.get("WA Risk Layers"))
+        pct_cashout = _normalize_profile_value(measures.get("% Cashout"))
+        pct_investor = _normalize_profile_value(measures.get("% Investor"))
+        pct_ca = _normalize_profile_value(measures.get("% CA"))
+
+        leverage = wa_cltv if wa_cltv is not None else wa_ltv
+        leverage_risk = "high_leverage" if (leverage is None or leverage >= 80) else "lower_leverage"
+        borrower_credit_risk = (
+            "elevated_credit_risk"
+            if (wa_fico is None or wa_fico < 680)
+            else "lower_credit_risk"
+        )
+        dti_stress = wa_dti is not None and wa_dti >= 43
+        risk_layers_stress = wa_risk_layers is not None and wa_risk_layers >= 0.28
+        cashout_stress = pct_cashout is not None and pct_cashout >= 0.12
+        investor_stress = pct_investor is not None and pct_investor >= 0.08
+        ca_stress = pct_ca is not None and pct_ca >= 0.12
+        performance_high = dti_stress or risk_layers_stress or cashout_stress or investor_stress or ca_stress
+        loan_performance_risk = "high_performance_risk" if performance_high else "lower_performance_risk"
+
+        cancel_flag = str(measures.get("Deal Cancel Flag", "")).strip().upper()
+        has_cancel_date = str(measures.get("Deal Cancel Date", "")).strip() != ""
+        adverse = cancel_flag in {"1", "Y", "TRUE"} or has_cancel_date or (wa_risk_layers is not None and wa_risk_layers >= 0.35)
+        delinquency_or_loss_proxy = "adverse_proxy" if adverse else "benign_proxy"
+
+        cohort_token = cohort.upper()
+        segment_stressed = ("G2" in cohort_token) or ("SUB" in cohort_token) or ("RISK" in cohort_token)
+        property_or_pool_segment = "stressed_segment" if segment_stressed else "standard_segment"
+
+        escalation_high = adverse or (performance_high and segment_stressed)
+        crt_escalation_risk = "high_escalation" if escalation_high else "low_escalation"
+
+        normalized.append(
+            {
+                "source_dataset": "fannie_mae_cas_loan_level",
+                "source_record_id": cohort or f"cas_profile_{idx}",
+                "tenant_id": "default",
+                "leverage_risk": leverage_risk,
+                "borrower_credit_risk": borrower_credit_risk,
+                "loan_performance_risk": loan_performance_risk,
+                "property_or_pool_segment": property_or_pool_segment,
+                "delinquency_or_loss_proxy": delinquency_or_loss_proxy,
+                "crt_escalation_risk": crt_escalation_risk,
+                "segment": cohort or "unspecified",
+                "mapping_notes": (
+                    "cas_profile_mapping;"
+                    "leverage_from_wa_ltv_cltv;"
+                    "credit_from_wa_fico;"
+                    "performance_from_wa_dti_risklayers_cashout_investor_ca;"
+                    "adverse_from_cancelflag_canceldate_risklayers"
+                ),
+            }
+        )
+    return normalized
+
+
 def _write_rows(path: Path, rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as fh:
@@ -254,11 +339,18 @@ def main() -> int:
         zip_member=args.zip_member,
     )
 
-    normalized: list[dict[str, str]] = []
-    for idx, row in enumerate(rows, start=1):
-        normalized.append(_normalize_row(row, idx))
-        if args.max_rows is not None and len(normalized) >= args.max_rows:
-            break
+    profile_layout = bool(rows) and {"cohort_selection_table", "measure_names", "measure_values"}.issubset(rows[0].keys())
+    if profile_layout:
+        normalized = _normalize_profile_rows(rows)
+    else:
+        normalized = []
+        for idx, row in enumerate(rows, start=1):
+            normalized.append(_normalize_row(row, idx))
+            if args.max_rows is not None and len(normalized) >= args.max_rows:
+                break
+
+    if args.max_rows is not None and profile_layout:
+        normalized = normalized[: args.max_rows]
 
     _write_rows(Path(args.output), normalized)
     print(f"prepared_rows={len(normalized)} output={args.output}")
