@@ -1,0 +1,774 @@
+# Downloaded File Inventory (docs/new)
+
+Generated: 2026-05-24T22:34:19Z
+
+## Summary
+
+- Total files inspected: 117
+- cohort/aggregate validation data: 1
+- dashboard export: 9
+- loan-level validation data: 101
+- schema/header/glossary: 1
+- unsupported: 5
+
+## Usable structured candidates
+
+- `docs/new/CAS APRIL 2026/CAS_Apr26.csv`
+  - class: loan-level validation data
+  - size_bytes: 3013506267
+  - delimiter: `|`
+  - fields(first row): 113
+  - estimated_rows: 8969701
+  - reason: Fannie CAS loan-level disclosure rows (headerless) with external header map.
+- `docs/new/CAS APRIL 2026/CAS_Apr26.zip`
+  - class: loan-level validation data
+  - size_bytes: 507903735
+  - reason: Compressed structured candidate with tabular members.
+- `docs/new/CRT/16DI01_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 5645369
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 16611
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/16DNA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 35769867
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 106075
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/16HQA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 26984660
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 80076
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/16HQA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 23231212
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 68880
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/16HQA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 20352845
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 60173
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/17DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 46278458
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 137308
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/17DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 79765150
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 236104
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/17HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 41751705
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 123459
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/17HQA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 43962445
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 129645
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/17HRP1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 28578136
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 82505
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 49795587
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 146822
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 71034862
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 208167
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18DNA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 43807729
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 128444
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 57119387
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 167131
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18HQA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 52588394
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 153689
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18HRP1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 56607112
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 163537
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18HRP2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 49599364
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 143193
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/18SPI4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 9370355
+  - delimiter: `|`
+  - fields(first row): 118
+  - estimated_rows: 20371
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 36135779
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 106456
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 29733823
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 86822
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19DNA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 37632465
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 109529
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19DNA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 30535810
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 88492
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19FTR1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 65616049
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 191861
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19FTR2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 16993137
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 50019
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19FTR3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 195579752
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 580187
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19FTR4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 135726418
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 401275
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 29668342
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 87032
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19HQA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 28363197
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 82593
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/19HQA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 19739099
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 57539
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 40599471
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 117758
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 56040894
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 162938
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20DNA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 61043775
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 179255
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20DNA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 53667657
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 157085
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20DNA5_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 50489738
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 149853
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20DNA6_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 43106230
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 129426
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 32666821
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 94668
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20HQA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 40607472
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 118533
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/20HQA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 32781786
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 94936
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 58151508
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 172913
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21DNA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 47134856
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 140414
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21DNA5_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 77332411
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 230218
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21DNA6_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 103539001
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 286388
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21DNA7_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 79103689
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 216823
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 71119644
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 211865
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21HQA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 44756959
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 123999
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21HQA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 37289862
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 102136
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21SP01_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 48950583
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 145407
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21SP03_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 61932998
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 185644
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21SP07_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 60799716
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 180362
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21SP08_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 42833679
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 118734
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/21SP09_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 22420027
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 62002
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22AFH1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 14525528
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 39749
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22AFH2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 14757373
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 40486
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22COR1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 13147628
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 35820
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 39882222
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 109616
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 52658602
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 144100
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22DNA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 51531716
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 140861
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22DNA5_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 40421279
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 109622
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22DNA6_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 41077730
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 113004
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 52242423
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 143353
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22HQA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 23194236
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 63772
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22HQA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 18177005
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 49196
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPH1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 18599053
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 50515
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPH2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 14762990
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 40037
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPH3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 14474847
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 39639
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPL1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 26464966
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 72553
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPL3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 15997836
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 43706
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPL4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 15977936
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 43659
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPL5_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 20071271
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 54995
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPL6_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 18925158
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 51987
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/22SPL7_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 18917751
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 51863
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/23HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 14178783
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 37786
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/23HQA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 19079834
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 51887
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/23HQA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 23092291
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 62903
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/23SPL1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 9201228
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 25165
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/23SPL2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 8267702
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 22624
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/23SPL3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 7986624
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 21927
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 21564879
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 58915
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 35090157
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 96392
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24HQA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 36048147
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 99348
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24SPH1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 9540073
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 26363
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24SPH2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 11587569
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 31703
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24SPH3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 12428816
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 34297
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24SPL1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 7268305
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 20234
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/24SPL2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 11656823
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 31828
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 20895401
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 57002
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 19079119
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 56121
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25DNA3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 19918568
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 58660
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25DNA4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 19202106
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 56934
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25HQA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 20992705
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 57184
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25SPH1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 12920511
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 35570
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25SPH2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 11583421
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 31547
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25SPH3_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 11316429
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 33134
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25SPH4_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 8842657
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 25838
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/25SPL1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 9225535
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 27095
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/26DNA1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 22033883
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 64349
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/26DNA2_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 24929262
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 73503
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/26SPH1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 9112730
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 26764
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/CRT/26SPL1_20260501_lld.txt`
+  - class: loan-level validation data
+  - size_bytes: 15411873
+  - delimiter: `|`
+  - fields(first row): 90
+  - estimated_rows: 45688
+  - reason: Freddie-style CRT loan-level disclosure with full-width field layout.
+- `docs/new/DEAL-RELATIVE-PROFILE-COMPARISON_Profile_data.csv`
+  - class: cohort/aggregate validation data
+  - size_bytes: 39359
+  - delimiter: `,`
+  - fields(first row): 4
+  - estimated_rows: 976
+  - reason: Aggregate profile export (cohort-level, not loan-level records).
+
+## Rejected or context-only files
+
+- `docs/new/Across Years Graph (1).pdf`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/Across Years Graph (2).pdf`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/Across Years Graph.pdf`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CAS APRIL 2026/CAS_Header_File.csv`
+  - class: schema/header/glossary
+  - reason: Header dictionary file for separate headerless dataset.
+- `docs/new/CAS Deal Performance Data Live (0).pptx`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CAS Deal Performance Data Live (1).pptx`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CAS Deal Performance Data Live (2).pptx`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CAS Deal Performance Data Live (3).pptx`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CAS Deal Performance Data Live.pdf`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CAS Deal Performance Data Live.pptx`
+  - class: dashboard export
+  - reason: Context/aggregate visual document; not primary structured validation input.
+- `docs/new/CRT/15SC02_20260501_lld.txt`
+  - class: unsupported
+  - reason: LLD filename but short-width row layout; not compatible with current loan-level mapping.
+- `docs/new/CRT/16SC01_20260501_lld.txt`
+  - class: unsupported
+  - reason: LLD filename but short-width row layout; not compatible with current loan-level mapping.
+- `docs/new/CRT/16SC02_20260501_lld.txt`
+  - class: unsupported
+  - reason: LLD filename but short-width row layout; not compatible with current loan-level mapping.
+- `docs/new/CRT/17SC01_20260501_lld.txt`
+  - class: unsupported
+  - reason: LLD filename but short-width row layout; not compatible with current loan-level mapping.
+- `docs/new/CRT/17SC02_20260501_lld.txt`
+  - class: unsupported
+  - reason: LLD filename but short-width row layout; not compatible with current loan-level mapping.
