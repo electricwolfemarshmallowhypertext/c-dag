@@ -42,9 +42,16 @@ def _detect_delimiter(header_line: str) -> str:
     return "|" if header_line.count("|") > header_line.count(",") else ","
 
 
+def _decode_bytes(content: bytes, preferred_encoding: str) -> str:
+    try:
+        return content.decode(preferred_encoding)
+    except UnicodeDecodeError:
+        return content.decode("cp1252")
+
+
 def _load_text(path: Path, *, encoding: str, zip_member: str | None) -> str:
     if path.suffix.lower() != ".zip":
-        return path.read_text(encoding=encoding)
+        return _decode_bytes(path.read_bytes(), encoding)
 
     with zipfile.ZipFile(path, "r") as zf:
         member_name = zip_member
@@ -58,7 +65,19 @@ def _load_text(path: Path, *, encoding: str, zip_member: str | None) -> str:
                 raise ValueError("ZIP input contains no .csv or .txt members")
             member_name = candidates[0]
         with zf.open(member_name, "r") as fh:
-            return fh.read().decode(encoding)
+            return _decode_bytes(fh.read(), encoding)
+
+
+def _load_header_fieldnames(header_file: Path, encoding: str) -> list[str]:
+    header_text = _decode_bytes(header_file.read_bytes(), encoding)
+    reader = csv.reader(io.StringIO(header_text))
+    row = next(reader, None)
+    if not row:
+        raise ValueError(f"Header file is empty: {header_file}")
+    headers = [normalize_header(value) for value in row]
+    if not any(headers):
+        raise ValueError(f"Header file has no usable field names: {header_file}")
+    return headers
 
 
 def _read_rows(
@@ -67,20 +86,78 @@ def _read_rows(
     delimiter: str,
     encoding: str,
     zip_member: str | None,
+    header_fieldnames: list[str] | None = None,
+    max_rows: int | None = None,
 ) -> list[dict[str, str]]:
+    if input_path.suffix.lower() != ".zip":
+        with input_path.open("r", encoding=encoding, newline="") as fh:
+            first_line = ""
+            while True:
+                probe = fh.readline()
+                if probe == "":
+                    break
+                if probe.strip():
+                    first_line = probe
+                    break
+            if first_line == "":
+                raise ValueError(f"Input is empty: {input_path}")
+            parsed_delimiter = _detect_delimiter(first_line) if delimiter == "auto" else delimiter
+            fh.seek(0)
+
+            rows: list[dict[str, str]] = []
+            if header_fieldnames is not None:
+                headers = header_fieldnames
+                reader = csv.reader(fh, delimiter=parsed_delimiter)
+                for raw in reader:
+                    row = {
+                        headers[idx]: str(value).strip()
+                        for idx, value in enumerate(raw)
+                        if idx < len(headers)
+                    }
+                    rows.append(row)
+                    if max_rows is not None and len(rows) >= max_rows:
+                        break
+                return rows
+
+            reader = csv.DictReader(fh, delimiter=parsed_delimiter)
+            if reader.fieldnames is None:
+                raise ValueError(f"Input is missing a header row: {input_path}")
+            headers = [normalize_header(name) for name in reader.fieldnames]
+            for raw in reader:
+                row = {
+                    headers[idx]: str(value).strip()
+                    for idx, value in enumerate(raw.values())
+                    if idx < len(headers)
+                }
+                rows.append(row)
+                if max_rows is not None and len(rows) >= max_rows:
+                    break
+            return rows
+
     text = _load_text(input_path, encoding=encoding, zip_member=zip_member)
     if not text.strip():
         raise ValueError(f"Input is empty: {input_path}")
-
     first_line = next((line for line in text.splitlines() if line.strip()), "")
     parsed_delimiter = _detect_delimiter(first_line) if delimiter == "auto" else delimiter
+    rows = []
+    if header_fieldnames is not None:
+        headers = header_fieldnames
+        reader = csv.reader(io.StringIO(text), delimiter=parsed_delimiter)
+        for raw in reader:
+            row = {
+                headers[idx]: str(value).strip()
+                for idx, value in enumerate(raw)
+                if idx < len(headers)
+            }
+            rows.append(row)
+            if max_rows is not None and len(rows) >= max_rows:
+                break
+        return rows
 
     reader = csv.DictReader(io.StringIO(text), delimiter=parsed_delimiter)
     if reader.fieldnames is None:
         raise ValueError(f"Input is missing a header row: {input_path}")
-
     headers = [normalize_header(name) for name in reader.fieldnames]
-    rows: list[dict[str, str]] = []
     for raw in reader:
         row = {
             headers[idx]: str(value).strip()
@@ -88,6 +165,8 @@ def _read_rows(
             if idx < len(headers)
         }
         rows.append(row)
+        if max_rows is not None and len(rows) >= max_rows:
+            break
     return rows
 
 
@@ -124,6 +203,8 @@ def _map_leverage_risk(row: dict[str, str]) -> str:
         first_value(
             row,
             (
+                "original_combined_loan_to_value_ratio_cltv",
+                "original_loan_to_value_ratio_ltv",
                 "original_cltv",
                 "current_cltv",
                 "combined_ltv",
@@ -136,14 +217,28 @@ def _map_leverage_risk(row: dict[str, str]) -> str:
         )
     )
     if leverage is not None:
-        return "high_leverage" if leverage >= 80 else "lower_leverage"
+        return "high_leverage" if leverage >= 92 else "lower_leverage"
     return "high_leverage"
 
 
 def _map_borrower_credit_risk(row: dict[str, str]) -> str:
-    fico = to_int(first_value(row, ("borrower_credit_score", "credit_score", "fico", "original_fico")))
+    fico = to_int(
+        first_value(
+            row,
+            (
+                "borrower_credit_score_at_origination",
+                "borrower_credit_score_current",
+                "origination_classic_fico",
+                "current_classic_fico",
+                "borrower_credit_score",
+                "credit_score",
+                "fico",
+                "original_fico",
+            ),
+        )
+    )
     if fico is not None:
-        return "elevated_credit_risk" if fico < 680 else "lower_credit_risk"
+        return "elevated_credit_risk" if fico < 720 else "lower_credit_risk"
     return "elevated_credit_risk"
 
 
@@ -168,9 +263,17 @@ def _normalize_row(row: dict[str, str], index: int) -> dict[str, str]:
     borrower_credit_risk = _map_borrower_credit_risk(row)
     adverse = _is_adverse_outcome(row)
     segment_value, segment_token = _map_segment_state(row)
+    occupancy = (first_value(row, ("occupancy_status", "occupancy", "occ")) or "").strip().upper()
+    loan_purpose = (first_value(row, ("loan_purpose", "purpose")) or "").strip().upper()
+    property_type = (first_value(row, ("property_type", "property")) or "").strip().upper()
+    dti = to_float(first_value(row, ("debt_to_income_dti", "debt_to_income", "dti")))
 
     stressed_keywords = ("INV", "SUB", "RISK", "IO", "NEG", "ALT", "NONOWNER", "NON_OWNER")
     stressed = any(keyword in segment_token for keyword in stressed_keywords)
+    if occupancy in {"I", "INV"} or loan_purpose == "C" or property_type in {"MH", "CP"}:
+        stressed = True
+    if dti is not None and dti >= 43:
+        stressed = True
     if leverage_risk == "high_leverage" and borrower_credit_risk == "elevated_credit_risk":
         stressed = True
 
@@ -312,6 +415,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Prepare Fannie CAS-style CRT validation input.")
     parser.add_argument("--input", required=True, help="Path to local CAS disclosure file (.csv/.txt/.zip).")
     parser.add_argument(
+        "--header-file",
+        default=None,
+        help="Optional separate header file for headerless CAS rows (e.g. CAS_Header_File.csv).",
+    )
+    parser.add_argument(
         "--output",
         default=str(ROOT / "validation" / "outputs" / "fannie_cas_normalized.csv"),
         help="Normalized output CSV path.",
@@ -332,11 +440,17 @@ def main() -> int:
     if args.max_rows is not None and args.max_rows <= 0:
         raise ValueError("--max-rows must be a positive integer")
 
+    header_fieldnames: list[str] | None = None
+    if args.header_file:
+        header_fieldnames = _load_header_fieldnames(Path(args.header_file), args.encoding)
+
     rows = _read_rows(
         input_path=Path(args.input),
         delimiter=args.delimiter,
         encoding=args.encoding,
         zip_member=args.zip_member,
+        header_fieldnames=header_fieldnames,
+        max_rows=args.max_rows,
     )
 
     profile_layout = bool(rows) and {"cohort_selection_table", "measure_names", "measure_values"}.issubset(rows[0].keys())

@@ -60,6 +60,48 @@ def test_prepare_fannie_cas_normalizes_rows() -> None:
         assert rows[1]["crt_escalation_risk"] == "low_escalation"
 
 
+def test_prepare_fannie_cas_headerless_with_external_header_file() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_dir = Path(tmp)
+        input_csv = tmp_dir / "cas_data.csv"
+        header_csv = tmp_dir / "CAS_Header_File.csv"
+        output_csv = tmp_dir / "fannie_cas_norm.csv"
+
+        header_csv.write_text(
+            "Loan Identifier,Original Combined Loan to Value Ratio (CLTV),Borrower Credit Score at Origination,Current Loan Delinquency Status,Property State,Deal Name\n",
+            encoding="cp1252",
+        )
+        input_csv.write_text(
+            "L1|92|640|4|CA|CAS 2016 C03 G2\n"
+            "L2|70|730|0|TX|CAS 2019 R01 G1\n",
+            encoding="utf-8",
+        )
+
+        result = _run(
+            [
+                "scripts/prepare_fannie_cas.py",
+                "--input",
+                str(input_csv),
+                "--header-file",
+                str(header_csv),
+                "--delimiter",
+                "|",
+                "--output",
+                str(output_csv),
+                "--max-rows",
+                "2",
+            ]
+        )
+        assert result.returncode == 0, result.stderr
+
+        with output_csv.open("r", encoding="utf-8", newline="") as fh:
+            rows = list(csv.DictReader(fh))
+        assert len(rows) == 2
+        assert rows[0]["source_record_id"] == "L1"
+        assert rows[0]["crt_escalation_risk"] == "high_escalation"
+        assert rows[1]["source_record_id"] == "L2"
+
+
 def test_prepare_freddie_stacr_normalizes_rows() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_dir = Path(tmp)
