@@ -1,0 +1,373 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C-DAG | Replayable Causal Audit Infrastructure</title>
+  <meta name="description" content="Replayable causal audit traces for high-risk financial AI decisions.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="microbar" aria-label="Top bar">
+    <div class="container microbar-inner">
+      <p class="microbar-left"><strong>C-DAG</strong> | public financial validation</p>
+      <nav class="microbar-right" aria-label="Primary links">
+        <a href="https://github.com/electricwolfemarshmallowhypertext/c-dag">GitHub</a>
+        <a href="https://github.com/electricwolfemarshmallowhypertext/c-dag/releases/tag/v0.5.0">v0.5.0</a>
+        <a href="mailto:smith@antiparty.co?subject=C-DAG%20pilot%20request">Pilot</a>
+        <button id="theme-toggle" data-theme-toggle type="button" class="theme-toggle" aria-pressed="false" aria-label="Toggle light and dark theme">
+          <svg class="theme-icon theme-mode-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-mode-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3a9 9 0 1 0 9 9 7 7 0 1 1-9-9z"></path>
+          </svg>
+          <span class="sr-only" data-theme-label id="theme-toggle-label">Dark</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section-break" aria-labelledby="hero-headline">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1 id="hero-headline" class="display-headline">
+            <span>REPLAY.</span>
+            <span>AUDIT.</span>
+            <span>VERIFY.</span>
+          </h1>
+          <p class="hero-subtitle">Replayable causal audit traces for high-risk financial AI decisions.</p>
+          <p class="hero-proof-line">Validated across public financial datasets spanning mortgage performance, mortgage applications, consumer complaints, CRT, and CAS disclosure data.</p>
+        </div>
+
+        <aside class="proof-card" aria-label="C-DAG proof card">
+          <div class="accent-mark" aria-hidden="true"></div>
+          <p class="proof-kicker">C-DAG</p>
+          <p class="proof-title">causal audit infrastructure</p>
+          <p class="proof-triad">
+            <span>public validation</span>
+            <span>deterministic replay</span>
+            <span>audit-chain integrity</span>
+            <span>v0.5.0</span>
+          </p>
+          <a class="doi-link" href="https://doi.org/10.5281/zenodo.19779499">DOI 10.5281/zenodo.19779499</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="metrics section-break" aria-label="Proof metrics">
+      <div class="container metrics-row">
+        <article class="metric-item">
+          <p class="metric-value" data-count-to="100" data-count-decimals="0" data-count-suffix="k+">100k+</p>
+          <p class="metric-label">public financial rows processed</p>
+        </article>
+        <article class="metric-item">
+          <p class="metric-value" data-count-to="6" data-count-decimals="0">6</p>
+          <p class="metric-label">validation lanes</p>
+        </article>
+        <article class="metric-item">
+          <p class="metric-value" data-count-to="5" data-count-decimals="0">5</p>
+          <p class="metric-label">public financial data types</p>
+        </article>
+        <article class="metric-item">
+          <p class="metric-value" data-count-to="1" data-count-decimals="1">1.0</p>
+          <p class="metric-label">replay success across validation runs</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="governance section-break" aria-labelledby="governance-title">
+      <div class="container">
+        <p class="section-token">governance</p>
+        <h2 id="governance-title" class="section-title">HOW IT SOLVES THE GOVERNANCE GAP</h2>
+        <div class="numbered-rows" role="table" aria-label="Governance capabilities">
+          <div class="row" role="row">
+            <p class="row-num" role="cell">01.</p>
+            <p class="row-name" role="cell">Decision trace</p>
+            <p class="row-desc" role="cell">Links observed evidence to inferred causal pathway with state-level probabilities.</p>
+          </div>
+          <div class="row" role="row">
+            <p class="row-num" role="cell">02.</p>
+            <p class="row-name" role="cell">Counterfactual check</p>
+            <p class="row-desc" role="cell">Shows before/after risk deltas under explicit interventions for contestability review.</p>
+          </div>
+          <div class="row" role="row">
+            <p class="row-num" role="cell">03.</p>
+            <p class="row-name" role="cell">Replay verification</p>
+            <p class="row-desc" role="cell">Deterministically recomputes audit records against active model/policy contracts.</p>
+          </div>
+          <div class="row" role="row">
+            <p class="row-num" role="cell">04.</p>
+            <p class="row-name" role="cell">Audit hash-chain</p>
+            <p class="row-desc" role="cell">Adds tamper-evident chaining for review workflows and escalation evidence.</p>
+          </div>
+          <div class="row" role="row">
+            <p class="row-num" role="cell">05.</p>
+            <p class="row-name" role="cell">Evidence pack</p>
+            <p class="row-desc" role="cell">Exports decision outputs, fairness diagnostics, and replay proofs for governance files.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-boundary-wrap section-break" aria-label="C-DAG outputs and boundaries">
+      <div class="container">
+        <div class="feature-boundary-grid">
+          <article class="feature-panel">
+            <div class="feature-left">
+              <p class="feature-token">C-DAG proof block</p>
+              <div class="feature-stack" aria-hidden="true">
+                <span>public validation</span>
+                <span>audit-chain integrity</span>
+                <span>evidence-pack export</span>
+              </div>
+            </div>
+            <div class="feature-right">
+              <h2 id="produces-title" class="feature-title">WHAT C-DAG PRODUCES</h2>
+              <ul class="feature-list" role="list">
+                <li>
+                  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 18c4 0 4-12 8-12s4 12 8 12"></path>
+                    <circle cx="4" cy="18" r="1.4"></circle>
+                    <circle cx="12" cy="6" r="1.4"></circle>
+                    <circle cx="20" cy="18" r="1.4"></circle>
+                  </svg>
+                  <span>Causal decision pathway</span>
+                </li>
+                <li>
+                  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M10 22a2 2 0 0 1-2-2"></path>
+                    <path d="M16 22h-2"></path>
+                    <path d="M16 4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-5a2 2 0 0 1 2-2h5a1 1 0 0 0 1-1z"></path>
+                    <path d="M20 8a2 2 0 0 1 2 2"></path>
+                    <path d="M22 14v2"></path>
+                    <path d="M22 20a2 2 0 0 1-2 2"></path>
+                  </svg>
+                  <span>Counterfactual risk deltas</span>
+                </li>
+                <li>
+                  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <polyline points="7 17 2 12 7 7"></polyline>
+                    <polyline points="12 17 7 12 12 7"></polyline>
+                    <path d="M22 18v-2a4 4 0 0 0-4-4H7"></path>
+                  </svg>
+                  <span>Deterministic replay result</span>
+                </li>
+                <li>
+                  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <line x1="4" y1="9" x2="20" y2="9"></line>
+                    <line x1="4" y1="15" x2="20" y2="15"></line>
+                    <line x1="10" y1="3" x2="8" y2="21"></line>
+                    <line x1="16" y1="3" x2="14" y2="21"></line>
+                  </svg>
+                  <span>Tamper-evident audit hash</span>
+                </li>
+                <li>
+                  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m13 13.5 2-2.5-2-2.5"></path>
+                    <path d="m21 21-4.3-4.3"></path>
+                    <path d="M9 8.5 7 11l2 2.5"></path>
+                    <circle cx="11" cy="11" r="8"></circle>
+                  </svg>
+                  <span>Fairness / segment diagnostics</span>
+                </li>
+                <li>
+                  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 17l2-5h14l-3 8a2 2 0 0 1-2 1H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v4"></path>
+                  </svg>
+                  <span>Exportable evidence pack</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <section class="boundaries boundaries-inline" aria-labelledby="boundaries-title">
+            <p class="section-token">boundaries</p>
+            <h2 id="boundaries-title" class="section-title">BOUNDARIES</h2>
+            <div class="boundary-accordion" data-accordion>
+              <article class="acc-item">
+                <h3>
+                  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false" aria-controls="acc-1" id="acc-trigger-1">
+                    <span>Is this production validation?</span>
+                    <span class="acc-mark" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div id="acc-1" class="acc-panel" role="region" aria-labelledby="acc-trigger-1" hidden>
+                  <p>No. This is public dataset validation, not production validation.</p>
+                </div>
+              </article>
+
+              <article class="acc-item">
+                <h3>
+                  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false" aria-controls="acc-2" id="acc-trigger-2">
+                    <span>Is this a credit approval system?</span>
+                    <span class="acc-mark" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div id="acc-2" class="acc-panel" role="region" aria-labelledby="acc-trigger-2" hidden>
+                  <p>No. It is a source-available reference implementation for governance explainability.</p>
+                </div>
+              </article>
+
+              <article class="acc-item">
+                <h3>
+                  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false" aria-controls="acc-3" id="acc-trigger-3">
+                    <span>Does this prove regulatory compliance?</span>
+                    <span class="acc-mark" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div id="acc-3" class="acc-panel" role="region" aria-labelledby="acc-trigger-3" hidden>
+                  <p>No. It does not prove regulatory compliance.</p>
+                </div>
+              </article>
+
+              <article class="acc-item">
+                <h3>
+                  <button type="button" class="acc-trigger" data-acc-trigger aria-expanded="false" aria-controls="acc-4" id="acc-trigger-4">
+                    <span>Was customer data used?</span>
+                    <span class="acc-mark" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div id="acc-4" class="acc-panel" role="region" aria-labelledby="acc-trigger-4" hidden>
+                  <p>No. Validation examples use public financial datasets only.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="validation section-break" aria-labelledby="validation-title">
+      <div class="container">
+        <p class="section-token">validation proof</p>
+        <h2 id="validation-title" class="section-title">PUBLIC FINANCIAL VALIDATION PROOF</h2>
+        <div class="validation-grid" role="list">
+          <article class="validation-card" role="listitem">
+            <h3>Freddie + Fannie + HMDA</h3>
+            <p><strong>rows:</strong> 30,000</p>
+            <p><strong>distribution:</strong> APPROVE 9,584 / REVIEW 4,368 / DECLINE 16,048</p>
+            <p><strong>replay:</strong> 1.0</p>
+            <p><strong>audit-chain:</strong> <span class="status-verified">verified</span></p>
+          </article>
+
+          <article class="validation-card" role="listitem">
+            <h3>Fannie CAS April 2026</h3>
+            <p><strong>rows:</strong> 10,000</p>
+            <p><strong>distribution:</strong> APPROVE 7,948 / REVIEW 686 / DECLINE 1,366</p>
+            <p><strong>replay:</strong> 1.0</p>
+            <p><strong>audit-chain:</strong> <span class="status-verified">verified</span></p>
+          </article>
+
+          <article class="validation-card" role="listitem">
+            <h3>Freddie/STACR CRT</h3>
+            <p><strong>rows:</strong> 10,000</p>
+            <p><strong>distribution:</strong> APPROVE 9,299 / REVIEW 0 / DECLINE 701</p>
+            <p><strong>replay:</strong> 1.0</p>
+            <p><strong>audit-chain:</strong> <span class="status-verified">verified</span></p>
+          </article>
+
+          <article class="validation-card" role="listitem">
+            <h3>CFPB complaints</h3>
+            <p><strong>rows:</strong> 10,000</p>
+            <p><strong>distribution:</strong> APPROVE 0 / REVIEW 9,837 / DECLINE 163</p>
+            <p><strong>replay:</strong> 1.0</p>
+            <p><strong>audit-chain:</strong> <span class="status-verified">verified</span></p>
+          </article>
+
+          <article class="validation-card" role="listitem">
+            <h3>Baseline outcome holdout</h3>
+            <p><strong>rows:</strong> train 58,579 / test 41,421</p>
+            <p><strong>metrics:</strong> AUC 0.573062 / PR-AUC 0.006059</p>
+            <p><strong>replay:</strong> 1.0</p>
+            <p><strong>audit-chain:</strong> <span class="status-verified">verified</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="loss-exposure section-break" aria-labelledby="loss-exposure-title">
+      <div class="container">
+        <p class="section-token">loss exposure evidence</p>
+        <h2 id="loss-exposure-title" class="section-title">LOSS EXPOSURE / BUSINESS RISK EVIDENCE</h2>
+        <p class="loss-exposure-lead">
+          Public enforcement, supervisory, and operational-risk evidence shows the cost of failure can reach millions to billions.
+          This section maps those public cases to the specific governance artifacts C-DAG produces before escalation.
+        </p>
+        <h3 class="loss-pack-title">C-DAG LOSS EXPOSURE PACK</h3>
+
+        <div class="loss-grid" role="list">
+          <article class="loss-card" role="listitem">
+            <h4>CFPB / Wells Fargo order</h4>
+            <p><strong>Public fact:</strong> CFPB announced a $3.7B order tied to auto-loan, mortgage, and deposit-account mismanagement.</p>
+            <p><strong>Workflow risk:</strong> servicing controls, fee handling, escalation and remediation traceability.</p>
+            <p><strong>C-DAG artifact fit:</strong> causal trace + replay check + audit hash-chain + evidence pack.</p>
+            <p><a href="https://www.consumerfinance.gov/about-us/newsroom/cfpb-orders-wells-fargo-to-pay-37-billion-for-widespread-mismanagement-of-auto-loans-mortgages-and-deposit-accounts/">Source</a></p>
+          </article>
+
+          <article class="loss-card" role="listitem">
+            <h4>FINRA 2025 fine categories</h4>
+            <p><strong>Public fact:</strong> AML, communications, trade reporting, and recordkeeping were major recurring fine categories.</p>
+            <p><strong>Workflow risk:</strong> weak controls around surveillance, reporting quality, and records integrity.</p>
+            <p><strong>C-DAG artifact fit:</strong> replayable decision records + tamper-evident chain for audit response.</p>
+            <p><a href="https://www.eversheds-sutherland.com/en/switzerland/insights/2025-finra-sanctions-study">Source</a></p>
+          </article>
+
+          <article class="loss-card" role="listitem">
+            <h4>SEC AI-washing enforcement focus</h4>
+            <p><strong>Public fact:</strong> SEC commentary and enforcement posture continued to target materially misleading AI claims.</p>
+            <p><strong>Workflow risk:</strong> governance claims that are not evidence-backed by traceable decision controls.</p>
+            <p><strong>C-DAG artifact fit:</strong> counterfactual review + replay result + evidence pack for claim substantiation.</p>
+            <p><a href="https://www.dlapiper.com/en/insights/publications/ai-outlook/2025/sec-emphasizes-focus-on-ai-washing">Source</a></p>
+          </article>
+
+          <article class="loss-card" role="listitem">
+            <h4>AI operational loss research</h4>
+            <p><strong>Public fact:</strong> published research reports higher operational losses per assets for BHCs with greater AI investment intensity.</p>
+            <p><strong>Workflow risk:</strong> scaling AI activity without matching controls for model, process, and incident governance.</p>
+            <p><strong>C-DAG artifact fit:</strong> deterministic replay + fairness diagnostics + auditable escalation evidence.</p>
+            <p><a href="https://ssrn.com/abstract=5544858">Source</a></p>
+          </article>
+
+          <article class="loss-card" role="listitem">
+            <h4>OCC risk framing</h4>
+            <p><strong>Public fact:</strong> OCC risk perspective highlights technology adoption as beneficial but requiring disciplined risk governance.</p>
+            <p><strong>Workflow risk:</strong> model, cybersecurity, and compliance control gaps across high-risk banking decisions.</p>
+            <p><strong>C-DAG artifact fit:</strong> causal pathway + policy traceability + audit chain + exportable evidence pack.</p>
+            <p><a href="https://www.occ.gov/publications-and-resources/publications/semiannual-risk-perspective/files/pub-semiannual-risk-perspective-spring-2025.pdf">Source</a></p>
+          </article>
+        </div>
+
+        <p class="loss-exposure-disclaimer">
+          C-DAG does not prove prevention or savings. It demonstrates how high-risk financial decisions can be made replayable, inspectable, and auditable before issues escalate.
+        </p>
+      </div>
+    </section>
+
+    <section class="final-cta section-break" aria-labelledby="final-cta-title">
+      <div class="container">
+        <article class="cta-panel">
+          <h2 id="final-cta-title">EVALUATE C-DAG AGAINST YOUR <span class="accent-governance">GOVERNANCE</span> WORKFLOW.</h2>
+          <nav class="cta-actions" aria-label="Final actions">
+            <a class="btn btn-primary" href="mailto:smith@antiparty.co?subject=C-DAG%20pilot%20request">Request pilot</a>
+            <a class="btn" href="https://github.com/electricwolfemarshmallowhypertext/c-dag">View GitHub</a>
+            <a class="btn" href="https://github.com/electricwolfemarshmallowhypertext/c-dag/releases/tag/v0.5.0">View v0.5.0</a>
+          </nav>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; C-DAG 2026 | Technical checks: 57 tests passing; default reference risk unchanged at 0.849375.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -140,3 +140,40 @@ CAS limitations:
 
 - CAS April 2026 mapping is proxy-based from loan-level disclosure fields into CRT causal states.
 - This run is a 10k capped pass for governance/audit-trace validation and does not establish production predictive validity.
+
+## Additional intake-corpus measured runs (Worker 2)
+
+These runs were executed against additional structured candidates discovered in `docs/new/`, without overwriting prior measured outputs.
+
+### Freddie/STACR additional run (26DNA2)
+
+- prep input: `docs/new/CRT/26DNA2_20260501_lld.txt`
+- normalized output: `validation/outputs/freddie_stacr_normalized.26DNA2.10k.csv`
+- validation output dir: `validation/outputs/crt_validation_26DNA2_10k`
+- rows_processed: `10,000`
+- accepted_rows: `10,000`
+- rejected_rows: `0`
+- decision distribution: APPROVE `9,420` | REVIEW `0` | DECLINE `580` | error `0`
+- replay_success_rate: `1.0`
+- audit_chain_verification: `true`
+- evidence_pack_mode: `sampled` (`1,000` rows)
+
+### Fannie CAS ZIP-path additional run (calibrated policy)
+
+- prep input: `docs/new/CAS APRIL 2026/CAS_Apr26.zip` (member: `CAS_Apr26.csv`)
+- header file: `docs/new/CAS APRIL 2026/CAS_Header_File.csv`
+- normalized output: `validation/outputs/fannie_cas_normalized.april2026.zip.10k.csv`
+- validation output dir: `validation/outputs/cas_validation_april2026_zip_10k_calibrated`
+- policy config: `configs/public_cas_policy.v1.json`
+- rows_processed: `10,000`
+- accepted_rows: `10,000`
+- rejected_rows: `0`
+- decision distribution: APPROVE `7,948` | REVIEW `686` | DECLINE `1,366` | error `0`
+- replay_success_rate: `1.0`
+- audit_chain_verification: `true`
+- evidence_pack_mode: `sampled` (`1,000` rows)
+
+### Intake rejection notes for structured-but-non-usable files
+
+- Short-width `*_lld` files with `4` fields on first row (for example `15SC02_20260501_lld.txt`) were rejected for loan-level validation because current CRT mappers require full-width disclosure layout.
+- `docs/new/DEAL-RELATIVE-PROFILE-COMPARISON_Profile_data.csv` was classified as cohort/aggregate context data and not used as primary loan-level validation input.
