@@ -79,3 +79,64 @@ Public CRT loan-level validation. Not production validation, not consumer credit
 - Mapping from `*_lld` fields into C-DAG CRT states is proxy-based and not equivalent to underwriting truth labels.
 - This run uses one real `*_lld` file capped at 10k rows as a pilot validation pass.
 - Results are for explainability/governance validation and replayability checks only.
+
+## Fannie CAS April 2026 validation
+
+Public CRT loan-level validation run from local CAS April 2026 files.
+Not production validation, not consumer credit eligibility, and not regulatory compliance proof.
+
+### CAS input and schema used
+
+- Data file: `docs/new/CAS APRIL 2026/CAS_Apr26.csv`
+- Header schema file: `docs/new/CAS APRIL 2026/CAS_Header_File.csv`
+- Data layout: headerless pipe-delimited rows (`113` fields)
+- Header layout: separate comma-delimited CAS header labels (`113` columns)
+- Prep path used: `scripts/prepare_fannie_cas.py` with `--header-file` and `--delimiter "|"`
+
+### CAS measured run configuration
+
+- Prepare command: `python scripts/prepare_fannie_cas.py --input "docs/new/CAS APRIL 2026/CAS_Apr26.csv" --header-file "docs/new/CAS APRIL 2026/CAS_Header_File.csv" --delimiter "|" --output "validation/outputs/fannie_cas_normalized.april2026.10k.csv" --max-rows 10000`
+- Baseline command (before calibration): `python scripts/run_crt_validation.py --input validation/outputs/fannie_cas_normalized.april2026.10k.csv --model-config configs/public_crt_model.v1.json --policy-config configs/public_crt_policy.v1.json --output-dir validation/outputs/cas_validation_april2026_10k --max-audits 50 --evidence-pack-max-rows 1000`
+- Calibrated command (CAS policy): `python scripts/run_crt_validation.py --input validation/outputs/fannie_cas_normalized.april2026.10k.csv --model-config configs/public_crt_model.v1.json --policy-config configs/public_cas_policy.v1.json --output-dir validation/outputs/cas_validation_april2026_10k_calibrated --max-audits 50 --evidence-pack-max-rows 1000`
+- CAS policy config: `configs/public_cas_policy.v1.json` (quantile-style thresholds from observed CAS risk score distribution)
+
+### CAS measured results
+
+- rows_processed: `10,000`
+- accepted_rows: `10,000`
+- rejected_rows: `0`
+- dataset source: `fannie_mae_cas_loan_level`
+
+Mapped fields:
+
+- `source_dataset`
+- `source_record_id`
+- `leverage_risk`
+- `borrower_credit_risk`
+- `loan_performance_risk`
+- `property_or_pool_segment`
+- `delinquency_or_loss_proxy`
+- `crt_escalation_risk`
+- `segment`
+
+Decision distribution:
+
+- before calibration: APPROVE `0` | REVIEW `0` | DECLINE `10,000` | error `0`
+- after calibration: APPROVE `7,948` | REVIEW `686` | DECLINE `1,366` | error `0`
+
+Replay and audit integrity:
+
+- before calibration replay_success_rate: `1.0`
+- before calibration audit_chain_verification: `true`
+- after calibration replay_success_rate: `1.0`
+- after calibration audit_chain_verification: `true`
+
+Evidence pack:
+
+- evidence_pack_mode: `sampled`
+- sampled_rows: `1,000`
+
+CAS limitations:
+
+- CAS April 2026 mapping is proxy-based from loan-level disclosure fields into CRT causal states.
+- This run is a 10k capped pass for governance/audit-trace validation and does not establish production predictive validity.
