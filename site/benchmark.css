@@ -1,0 +1,232 @@
+.benchmark-hero {
+  padding: clamp(2rem, 5vw, 4.5rem) 0;
+}
+
+.benchmark-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+  gap: clamp(1.3rem, 4vw, 3rem);
+  align-items: end;
+}
+
+.benchmark-title {
+  margin: 0;
+  max-width: 9ch;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(3.6rem, 10vw, 8.4rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.benchmark-title span {
+  color: var(--accent-lime);
+}
+
+.benchmark-subtitle {
+  margin: 1rem 0 0;
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+}
+
+.benchmark-status-card {
+  border: 1px solid rgba(156, 255, 0, 0.32);
+  background:
+    linear-gradient(135deg, rgba(156, 255, 0, 0.07), transparent 40%),
+    var(--panel);
+  padding: clamp(1rem, 2.5vw, 1.4rem);
+}
+
+.benchmark-status-card p {
+  margin: 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+
+.benchmark-status-spaced {
+  margin-top: 1rem;
+}
+
+.benchmark-status-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-size: clamp(1.45rem, 3vw, 2.4rem);
+  line-height: 1;
+}
+
+.benchmark-section {
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.benchmark-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.benchmark-proof {
+  min-height: 10rem;
+  padding: clamp(1rem, 2.3vw, 1.35rem);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.benchmark-proof strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: 0.9;
+  color: var(--accent-lime);
+}
+
+.benchmark-proof span {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+.benchmark-domain-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.benchmark-domain-list li {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.32rem 0.65rem;
+  color: var(--accent-cyan);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.benchmark-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+}
+
+.benchmark-table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+}
+
+.benchmark-table th,
+.benchmark-table td {
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.benchmark-table th {
+  color: var(--accent-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+.benchmark-table td {
+  color: var(--muted);
+}
+
+.benchmark-table strong {
+  color: var(--text);
+}
+
+.benchmark-bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: min(1rem, 20px);
+}
+
+.benchmark-card {
+  grid-column: span 2;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  padding: clamp(1rem, 2.4vw, 1.35rem);
+}
+
+.benchmark-card.wide {
+  grid-column: span 3;
+}
+
+.benchmark-card h3 {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  text-transform: uppercase;
+}
+
+.benchmark-card p,
+.benchmark-card li {
+  color: var(--muted);
+}
+
+.benchmark-card p {
+  margin: 0.6rem 0 0;
+}
+
+.benchmark-card ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.benchmark-card a {
+  color: var(--accent-cyan);
+}
+
+.benchmark-status-ok {
+  color: var(--accent-cyan);
+}
+
+.benchmark-status-missing {
+  color: var(--accent-lime);
+}
+
+.benchmark-note {
+  margin: 0.9rem 0 0;
+  color: var(--muted);
+  max-width: 76ch;
+}
+
+.benchmark-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+@media (max-width: 1024px) {
+  .benchmark-grid,
+  .benchmark-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .benchmark-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .benchmark-card,
+  .benchmark-card.wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .benchmark-grid,
+  .benchmark-proof-grid,
+  .benchmark-bento {
+    grid-template-columns: 1fr;
+  }
+}

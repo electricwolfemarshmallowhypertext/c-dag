@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C-DAG Benchmark | Evidence Dashboard</title>
+  <meta name="description" content="C-DAG benchmark and evidence dashboard for public financial validation artifacts.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="benchmark.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="microbar" aria-label="Top bar">
+    <div class="container microbar-inner">
+      <p class="microbar-left"><strong>C-DAG</strong> | evidence dashboard</p>
+      <nav class="microbar-right" aria-label="Primary links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/electricwolfemarshmallowhypertext/c-dag">GitHub</a>
+        <a href="https://github.com/electricwolfemarshmallowhypertext/c-dag/releases/tag/v0.5.0">v0.5.0</a>
+        <a href="mailto:smith@antiparty.co?subject=C-DAG%20pilot%20request">Pilot</a>
+        <button id="theme-toggle" data-theme-toggle type="button" class="theme-toggle" aria-pressed="false" aria-label="Toggle light and dark theme">
+          <svg class="theme-icon theme-mode-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-mode-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3a9 9 0 1 0 9 9 7 7 0 1 1-9-9z"></path>
+          </svg>
+          <span class="sr-only" data-theme-label id="theme-toggle-label">Dark</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="benchmark-hero section-break" aria-labelledby="benchmark-title">
+      <div class="container benchmark-grid">
+        <div>
+          <p class="section-token">benchmark / evidence dashboard</p>
+          <h1 id="benchmark-title" class="benchmark-title">WHAT <span>VERIFIED</span>.</h1>
+          <p class="benchmark-subtitle">
+            One evidence view for what C-DAG actually ran, what verified, what failed, and what remains bounded.
+          </p>
+        </div>
+        <aside class="benchmark-status-card" aria-label="Benchmark status">
+          <p>Evidence posture<strong>workflow evidence benchmark</strong></p>
+          <p class="benchmark-status-spaced">Boundary<strong>public validation only</strong></p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="benchmark-section section-break" aria-labelledby="coverage-title">
+      <div class="container">
+        <p class="section-token">validation coverage</p>
+        <h2 id="coverage-title" class="section-title">COVERAGE</h2>
+        <div class="benchmark-proof-grid" aria-label="Coverage metrics">
+          <article class="benchmark-proof">
+            <strong data-metric="rows">100k+</strong>
+            <span>public financial rows processed</span>
+          </article>
+          <article class="benchmark-proof">
+            <strong data-metric="lanes">6</strong>
+            <span>validation lanes</span>
+          </article>
+          <article class="benchmark-proof">
+            <strong data-metric="files">117</strong>
+            <span>file corpus inspected</span>
+          </article>
+          <article class="benchmark-proof">
+            <strong data-metric="usable">102</strong>
+            <span>usable structured candidates</span>
+          </article>
+        </div>
+        <ul class="benchmark-domain-list" data-domains aria-label="Public data domains">
+          <li>mortgage performance</li>
+          <li>mortgage applications</li>
+          <li>consumer complaints</li>
+          <li>CRT</li>
+          <li>CAS</li>
+          <li>public loss-exposure records</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="benchmark-section section-break" aria-labelledby="runs-title">
+      <div class="container">
+        <p class="section-token">validation lanes</p>
+        <h2 id="runs-title" class="section-title">WHAT RAN</h2>
+        <div class="benchmark-table-wrap">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Lane</th>
+                <th>Rows</th>
+                <th>Result</th>
+                <th>Replay</th>
+                <th>Audit-chain</th>
+              </tr>
+            </thead>
+            <tbody data-validation-body>
+              <tr>
+                <td><strong>Freddie + Fannie + HMDA</strong></td>
+                <td>30,000</td>
+                <td>APPROVE 9,584 / REVIEW 4,368 / DECLINE 16,048</td>
+                <td>100% replay success on sampled validation audit records</td>
+                <td><span class="benchmark-status-ok">verified</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="benchmark-section section-break" aria-labelledby="verification-title">
+      <div class="container">
+        <p class="section-token">verification</p>
+        <h2 id="verification-title" class="section-title">WHAT VERIFIED</h2>
+        <div class="benchmark-bento">
+          <article class="benchmark-card wide">
+            <h3>Replay verification</h3>
+            <p data-replay-status>100% replay success on sampled validation audit records.</p>
+            <p><strong>Sampled replay count:</strong> <span class="benchmark-status-missing" data-replay-count-status>not yet measured consistently across reports</span></p>
+          </article>
+          <article class="benchmark-card wide">
+            <h3>Audit-chain integrity</h3>
+            <p data-chain-status>audit-chain verification true across reported validation runs</p>
+            <p><strong>Chain records checked:</strong> <span class="benchmark-status-missing" data-chain-count-status>not yet measured consistently across reports</span></p>
+            <p><strong>Tamper test:</strong> valid chain passes; modified record fails.</p>
+          </article>
+          <article class="benchmark-card">
+            <h3>Performance benchmark</h3>
+            <p><strong>Status:</strong> <span class="benchmark-status-missing" data-performance-status>not yet measured</span></p>
+            <p>Batch throughput, evidence-pack timing, and validation duration are tracked as report TODOs.</p>
+          </article>
+          <article class="benchmark-card">
+            <h3>Holdout baseline</h3>
+            <p><strong>Rows:</strong> <span data-holdout-rows>train 58,579 / test 41,421</span></p>
+            <p><strong>Test positives:</strong> <span data-holdout-positives>201</span></p>
+            <p><strong>Metrics:</strong> <span data-holdout-metrics>AUC 0.573062 / PR-AUC 0.006059</span></p>
+            <p><strong>Distribution:</strong> <span data-holdout-distribution>APPROVE 36,336 / REVIEW 5,085 / DECLINE 0</span></p>
+          </article>
+          <article class="benchmark-card">
+            <h3>Bounded finding</h3>
+            <p>Baseline outcome validation is real but remains baseline evidence, not production model performance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="benchmark-section section-break" aria-labelledby="loss-title">
+      <div class="container">
+        <p class="section-token">estimated exposure mapping</p>
+        <h2 id="loss-title" class="section-title">LOSS EXPOSURE MAPPING</h2>
+        <p class="benchmark-note">
+          Parsed public records map failure types to replayable evidence and audit-ready artifacts. This does not claim prevention or savings.
+        </p>
+        <p class="benchmark-note">
+          Records parsed: <strong data-loss-records>5</strong>. Sources present: <span data-loss-sources>CFPB, FINRA, SEC, OCC, AI operational-loss research</span>.
+          Not yet parsed: <span class="benchmark-status-missing" data-loss-missing>FFIEC</span>.
+        </p>
+        <div class="benchmark-bento" data-loss-cases>
+          <article class="benchmark-card">
+            <h3>CFPB / Wells Fargo $3.7B order</h3>
+            <p><strong>Exposure:</strong> $3.7B</p>
+            <p><strong>Failure type:</strong> Consumer-harm and servicing-control breakdown.</p>
+            <p><strong>Missing artifact:</strong> Cross-workflow, replayable decision trace.</p>
+            <p><strong>C-DAG fit:</strong> trace, counterfactual, replay, hash-chain, evidence pack, risk-exposure mapping</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta section-break" aria-labelledby="benchmark-cta-title">
+      <div class="container">
+        <article class="cta-panel">
+          <h2 id="benchmark-cta-title">EVALUATE THE <span class="accent-governance">EVIDENCE</span>.</h2>
+          <p class="cta-note">Benchmark data is stored in validation/benchmark_metrics.json and summarized in validation/benchmark_report.md.</p>
+          <nav class="cta-actions" aria-label="Benchmark actions">
+            <a class="btn btn-primary" href="../validation/benchmark_report.md">View report</a>
+            <a class="btn" href="../validation/benchmark_metrics.json">View metrics JSON</a>
+            <a class="btn" href="index.html">Back to C-DAG</a>
+          </nav>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; C-DAG 2026 &middot; Public financial validation artifact &middot; Source-available under BUSL-1.1 &middot; v0.5.0</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="benchmark.js"></script>
+</body>
+</html>
