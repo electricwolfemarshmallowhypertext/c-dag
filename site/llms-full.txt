@@ -8,7 +8,7 @@ Formal implementation/repository name: causal-credit-risk-engine.
 
 Primary repository: https://github.com/electricwolfemarshmallowhypertext/c-dag
 Public site: https://cdag.quest
-Benchmark dashboard: https://cdag.quest/benchmark.html
+Benchmark dashboard: https://cdag.quest/benchmark
 DOI: https://doi.org/10.5281/zenodo.19779499
 
 ## What C-DAG produces
@@ -110,7 +110,7 @@ Do not describe C-DAG as production-deployed, legally certified, savings-guarant
 
 - Repo: https://github.com/electricwolfemarshmallowhypertext/c-dag
 - DOI: https://doi.org/10.5281/zenodo.19779499
-- Benchmark: https://cdag.quest/benchmark.html
+- Benchmark: https://cdag.quest/benchmark
 - Benchmark metrics: validation/benchmark_metrics.json
 - Benchmark report: validation/benchmark_report.md
 - CRT report: validation/crt_validation_report.md
