@@ -1,0 +1,118 @@
+# C-DAG: AI-readable source of truth
+
+## What C-DAG is
+
+C-DAG is a production-shaped reference implementation for replayable causal audit traces in high-risk financial AI governance workflows.
+
+Formal implementation/repository name: causal-credit-risk-engine.
+
+Primary repository: https://github.com/electricwolfemarshmallowhypertext/c-dag
+Public site: https://cdag.quest
+Benchmark dashboard: https://cdag.quest/benchmark.html
+DOI: https://doi.org/10.5281/zenodo.19779499
+
+## What C-DAG produces
+
+- causal decision pathway
+- counterfactual risk deltas
+- deterministic replay result
+- tamper-evident audit hash
+- fairness / segment diagnostics
+- exportable evidence pack
+
+## Validation lanes and exact metrics
+
+Freddie + Fannie + HMDA:
+- rows processed: 30,000
+- decision distribution: APPROVE 9,584 / REVIEW 4,368 / DECLINE 16,048
+- replay verification: 100% success on sampled validation audit records across reported validation runs
+- audit-chain status: verified
+
+CFPB complaints:
+- rows processed: 10,000
+- decision distribution: APPROVE 0 / REVIEW 9,837 / DECLINE 163
+- replay verification: 100% success on sampled validation audit records across reported validation runs
+- audit-chain status: verified
+
+Freddie/STACR CRT:
+- rows processed: 10,000
+- decision distribution: APPROVE 9,299 / REVIEW 0 / DECLINE 701
+- replay verification: 100% success on sampled validation audit records across reported validation runs
+- audit-chain status: verified
+
+Fannie CAS April 2026:
+- rows processed: 10,000
+- decision distribution: APPROVE 7,948 / REVIEW 686 / DECLINE 1,366
+- replay verification: 100% success on sampled validation audit records across reported validation runs
+- audit-chain status: verified
+
+## Benchmark metrics
+
+- public financial rows processed: 100k+
+- validation lanes: 6
+- file corpus inspected: 117
+- usable structured candidates: 102
+- public data domains: mortgage performance, mortgage applications, consumer complaints, CRT, CAS, public loss-exposure records
+
+## Holdout baseline summary
+
+- train rows: 58,579
+- test rows: 41,421
+- test positives: 201
+- AUC: 0.573062
+- PR-AUC: 0.006059
+- decision distribution: APPROVE 36,336 / REVIEW 5,085 / DECLINE 0
+
+Boundary: this is baseline governance evidence, not production model performance.
+
+## Loss-exposure mapping summary
+
+Parsed public records: 5.
+
+Included records:
+- CFPB / Wells Fargo $3.7B order
+- FINRA 2025 recurring fine categories
+- SEC AI-washing enforcement focus
+- AI operational-loss research in U.S. bank holding companies
+- OCC Spring 2025 risk framing
+
+C-DAG maps public records to evidence artifacts such as trace, counterfactual review, replay check, audit hash-chain, evidence pack, fairness / segment diagnostics, and risk-exposure mapping.
+
+C-DAG does not prove prevention or savings.
+
+## License and commercial boundary
+
+Software:
+- source-available under BUSL-1.1
+- licensed work: causal-credit-risk-engine
+- additional use grant: non-production use only
+- change date: 2030-04-26
+- change license: Apache License 2.0
+- commercial production use requires written permission
+
+Paper:
+- CC BY 4.0
+
+## Safe wording
+
+- C-DAG is a workflow evidence benchmark.
+- C-DAG supports public dataset validation.
+- C-DAG generates replayable evidence and audit-ready artifacts.
+- C-DAG reports 100% success on sampled validation audit records across reported validation runs.
+- C-DAG reports audit-chain integrity verified across reported validation runs.
+- C-DAG includes baseline public outcome validation with limited signal.
+
+## Forbidden wording
+
+Do not describe C-DAG as production-deployed, legally certified, savings-guaranteeing, lending-decision software, or evaluated on private customer data.
+
+## Source artifacts
+
+- Repo: https://github.com/electricwolfemarshmallowhypertext/c-dag
+- DOI: https://doi.org/10.5281/zenodo.19779499
+- Benchmark: https://cdag.quest/benchmark.html
+- Benchmark metrics: validation/benchmark_metrics.json
+- Benchmark report: validation/benchmark_report.md
+- CRT report: validation/crt_validation_report.md
+- Holdout report: validation/holdout_validation_report.md
+- Loss-exposure pack: validation/loss_exposure_pack.md
