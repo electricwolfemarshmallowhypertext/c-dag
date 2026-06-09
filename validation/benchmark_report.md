@@ -57,7 +57,7 @@ Verified in validation reports:
 - CAS validation reports replay success as `1.0`
 - mortgage holdout validation reports replay success as `1.0`
 
-TODO:
+Known missing measurements:
 
 - Record sampled replay audit count consistently across every validation report.
 
@@ -73,7 +73,7 @@ Verified in tests:
 - modified audit record fails hash verification
 - modified chain fails chain verification
 
-TODO:
+Known missing measurements:
 
 - Record audit-chain record count consistently across every validation report.
 
@@ -81,7 +81,7 @@ TODO:
 
 Timing metrics are not currently measured consistently enough to report.
 
-TODO:
+Known missing measurements:
 
 - Add measured batch throughput timing.
 - Add measured evidence-pack generation timing.
@@ -98,10 +98,10 @@ Parsed public-record pack:
 | Public record | Public exposure amount | Failure type | Missing evidence artifact | C-DAG artifact fit |
 | --- | --- | --- | --- | --- |
 | CFPB / Wells Fargo $3.7B order | $3.7B | Consumer-harm and servicing-control breakdown | Cross-workflow replayable decision trace | trace, counterfactual, replay, hash-chain, evidence pack, risk-exposure mapping |
-| FINRA 2025 recurring fine categories | not specified | Control, supervision, and record-integrity gaps | Tamper-evident control evidence | replay, hash-chain, evidence pack, risk-exposure mapping |
-| SEC AI-washing enforcement focus | not specified | Governance and disclosure mismatch | Trace-backed governance documentation | trace, counterfactual, replay, evidence pack, risk-exposure mapping |
-| AI operational-loss research in U.S. BHCs | not specified | Operational-risk exposure growth | Pre-escalation decision evidence | trace, replay, hash-chain, risk-exposure mapping |
-| OCC Spring 2025 risk framing | not specified | Model, cybersecurity, and compliance-control gaps | Integrated decision-level audit trail | trace, replay, hash-chain, evidence pack, risk-exposure mapping |
+| FINRA 2025 recurring fine categories | no parsed concrete dollar exposure | Control, supervision, and record-integrity gaps | Tamper-evident control evidence | replay, hash-chain, evidence pack, risk-exposure mapping |
+| SEC AI-washing enforcement focus | no parsed concrete dollar exposure | Governance and disclosure mismatch | Trace-backed governance documentation | trace, counterfactual, replay, evidence pack, risk-exposure mapping |
+| AI operational-loss research in U.S. BHCs | no parsed concrete dollar exposure | Operational-risk exposure growth | Pre-escalation decision evidence | trace, replay, hash-chain, risk-exposure mapping |
+| OCC Spring 2025 risk framing | no parsed concrete dollar exposure | Model, cybersecurity, and compliance-control gaps | Integrated decision-level audit trail | trace, replay, hash-chain, evidence pack, risk-exposure mapping |
 
 Boundary:
 
@@ -132,7 +132,7 @@ Dashboard page:
 
 - `site/benchmark.html`
 
-## TODO summary
+## Known missing measurements
 
 - Record sampled replay audit count consistently across every validation report.
 - Record audit-chain record count consistently across every validation report.
