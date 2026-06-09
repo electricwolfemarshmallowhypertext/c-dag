@@ -9,6 +9,13 @@ Formal implementation/repository name: `causal-credit-risk-engine`.
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19779499.svg)](https://doi.org/10.5281/zenodo.19779499)
 
+Public links:
+
+- Site: https://cdag.quest
+- Benchmark: https://cdag.quest/benchmark
+- Paper source: [docs/paper.md](docs/paper.md)
+- DOI: https://doi.org/10.5281/zenodo.19779499
+
 Config-driven causal inference engine for explainability experiments in credit-risk governance, counterfactuals, and audit traces.
 
 C-DAG is a production-shaped reference implementation for demonstrating how causal AI can support explainability, human oversight, decision traceability, and governance workflows in high-risk AI contexts.
@@ -33,6 +40,34 @@ A technical brief describing the architecture is available on Zenodo:
 - Record: https://zenodo.org/records/19779499
 
 The paper describes the causal audit-trace pattern behind this repository: config-driven causal reasoning, deterministic replay, audit-chain integrity, fairness diagnostics, and governance-oriented decision artifacts.
+
+## Benchmark / Evidence Dashboard
+
+The public benchmark dashboard packages measured repository outputs and parsed public records into one evidence view:
+
+- 100k+ public financial rows processed
+- 6 validation lanes
+- 117 files inspected
+- 102 usable structured candidates
+- 5 parsed public loss-exposure records
+- 59 passed, 1 warning
+- default risk 0.849375
+- default decision DECLINE
+
+Validation lanes:
+
+- Freddie + Fannie + HMDA
+- CFPB complaints
+- Freddie/STACR CRT
+- Fannie CAS April 2026
+- baseline outcome holdout
+- public loss-exposure mapping
+
+Deployment and discovery:
+
+- canonical domain: https://cdag.quest
+- clean benchmark URL: https://cdag.quest/benchmark
+- robots, sitemap, `llms.txt`, and `llms-full.txt` files are included for discoverability
 
 ## Public institutional validation
 
@@ -60,11 +95,11 @@ Example run summary:
 - Rejected rows: 0
 - Datasets used: Freddie Mac, Fannie Mae, HMDA/CFPB
 - Decision distribution: APPROVE 9,584 | REVIEW 4,368 | DECLINE 16,048
-- Replay success rate: 1.0
+- 100% replay success on sampled validation audit records across reported validation runs.
 - Audit-chain verification: true
 - Evidence-pack mode: sampled, 1,000 rows
 
-This is public institutional loan-level validation, not production validation. It does not use customer data, does not make real credit eligibility decisions, and does not prove regulatory compliance.
+This is public institutional loan-level reference validation. It does not use customer data, does not make live lending decisions, and is not a legal or regulatory certification.
 
 Run public validation:
 
@@ -77,10 +112,10 @@ Public complaint-data validation summary:
 - CFPB Consumer Complaint Database validation path
 - 10,000 real complaint rows processed
 - Decision distribution: APPROVE 0 | REVIEW 9,837 | DECLINE 163
-- Replay success rate: 1.0
+- 100% replay success on sampled validation audit records across reported validation runs.
 - Audit-chain verification: true
 
-This is public complaint-data validation, not production validation.
+This is public complaint-data reference validation.
 
 ## Executive positioning
 
