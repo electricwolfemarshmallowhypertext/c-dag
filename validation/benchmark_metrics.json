@@ -1,0 +1,225 @@
+{
+  "generated_utc": "2026-06-09T00:00:00Z",
+  "benchmark_id": "c_dag_evidence_dashboard_v1",
+  "benchmark_version": "1.0.0",
+  "scope": "Workflow evidence benchmark for public financial validation artifacts.",
+  "non_production_boundary": "Public dataset validation only. Not production validation, not a lending decision system, not customer-data validation, and not proof of regulatory compliance.",
+  "coverage": {
+    "public_financial_rows_processed_display": "100k+",
+    "validation_lanes": 6,
+    "file_corpus_inspected": 117,
+    "usable_structured_candidates": 102,
+    "public_data_domains_covered": [
+      "mortgage performance",
+      "mortgage applications",
+      "consumer complaints",
+      "CRT",
+      "CAS",
+      "public loss-exposure records"
+    ],
+    "file_inventory_counts": {
+      "loan_level_validation_data": 101,
+      "cohort_aggregate_validation_data": 1,
+      "dashboard_export": 9,
+      "schema_header_glossary": 1,
+      "unsupported": 5
+    }
+  },
+  "validation_lanes_detail": [
+    {
+      "lane": "Freddie + Fannie + HMDA",
+      "domain": "mortgage performance and mortgage applications",
+      "rows_processed": 30000,
+      "decision_distribution": {
+        "APPROVE": 9584,
+        "REVIEW": 4368,
+        "DECLINE": 16048
+      },
+      "replay_verification": "100% replay success on sampled validation audit records",
+      "audit_chain_verified": true
+    },
+    {
+      "lane": "CFPB complaints",
+      "domain": "consumer complaint escalation governance",
+      "rows_processed": 10000,
+      "decision_distribution": {
+        "APPROVE": 0,
+        "REVIEW": 9837,
+        "DECLINE": 163
+      },
+      "replay_verification": "100% replay success on sampled validation audit records",
+      "audit_chain_verified": true
+    },
+    {
+      "lane": "Freddie/STACR CRT",
+      "domain": "credit risk transfer disclosure",
+      "rows_processed": 10000,
+      "decision_distribution": {
+        "APPROVE": 9299,
+        "REVIEW": 0,
+        "DECLINE": 701
+      },
+      "replay_verification": "100% replay success on sampled validation audit records",
+      "audit_chain_verified": true
+    },
+    {
+      "lane": "Fannie CAS April 2026",
+      "domain": "credit risk transfer disclosure",
+      "rows_processed": 10000,
+      "decision_distribution": {
+        "APPROVE": 7948,
+        "REVIEW": 686,
+        "DECLINE": 1366
+      },
+      "replay_verification": "100% replay success on sampled validation audit records",
+      "audit_chain_verified": true
+    },
+    {
+      "lane": "Baseline outcome holdout",
+      "domain": "institutional mortgage performance",
+      "train_rows": 58579,
+      "test_rows": 41421,
+      "test_positives": 201,
+      "auc": 0.573062,
+      "pr_auc": 0.006059,
+      "decision_distribution": {
+        "APPROVE": 36336,
+        "REVIEW": 5085,
+        "DECLINE": 0
+      },
+      "replay_verification": "100% replay success on sampled validation audit records",
+      "audit_chain_verified": true,
+      "limitation": "Baseline outcome validation, not production model performance."
+    }
+  ],
+  "replay_verification": {
+    "status": "verified",
+    "statement": "100% replay success on sampled validation audit records.",
+    "sampled_replay_record_count": null,
+    "sampled_replay_record_count_status": "not yet measured consistently across reports"
+  },
+  "audit_chain_integrity": {
+    "status": "verified",
+    "validation_reports_status": "audit-chain verification true across reported validation runs",
+    "audit_chain_records_checked": null,
+    "audit_chain_records_checked_status": "not yet measured consistently across reports",
+    "tamper_test_result": {
+      "valid_chain_passes": true,
+      "modified_record_fails": true,
+      "source": "tests/test_audit_chain.py"
+    }
+  },
+  "performance_benchmark": {
+    "batch_throughput_timing": null,
+    "evidence_pack_generation_timing": null,
+    "validation_run_duration": null,
+    "status": "not yet measured"
+  },
+  "loss_exposure_mapping": {
+    "status": "parsed public records",
+    "records_parsed": 5,
+    "record_sources_present": [
+      "CFPB",
+      "FINRA",
+      "SEC",
+      "OCC",
+      "AI operational-loss research"
+    ],
+    "record_sources_not_yet_parsed": [
+      "FFIEC"
+    ],
+    "cases": [
+      {
+        "case_id": "cfpb_wells_fargo_3_7b_order",
+        "case_title": "CFPB / Wells Fargo $3.7B order",
+        "public_exposure_amount": "$3.7B",
+        "failure_type": "Consumer-harm and servicing-control breakdown across major retail product lines.",
+        "missing_evidence_artifact": "Cross-workflow, replayable decision trace linking inputs, controls, and remediation actions.",
+        "cdag_artifact_fit": [
+          "trace",
+          "counterfactual",
+          "replay",
+          "hash-chain",
+          "evidence pack",
+          "risk-exposure mapping"
+        ]
+      },
+      {
+        "case_id": "finra_2025_sanctions_categories",
+        "case_title": "FINRA 2025 recurring fine categories",
+        "public_exposure_amount": null,
+        "failure_type": "Control, supervision, and record-integrity gaps in regulated operational workflows.",
+        "missing_evidence_artifact": "Tamper-evident control evidence connecting policy decisions and operational outcomes.",
+        "cdag_artifact_fit": [
+          "replay",
+          "hash-chain",
+          "evidence pack",
+          "risk-exposure mapping"
+        ]
+      },
+      {
+        "case_id": "sec_ai_washing_enforcement_focus",
+        "case_title": "SEC AI-washing enforcement focus",
+        "public_exposure_amount": null,
+        "failure_type": "Governance and disclosure mismatch between AI claims and control evidence.",
+        "missing_evidence_artifact": "Deterministic replay and trace-backed governance documentation for AI decision processes.",
+        "cdag_artifact_fit": [
+          "trace",
+          "counterfactual",
+          "replay",
+          "evidence pack",
+          "risk-exposure mapping"
+        ]
+      },
+      {
+        "case_id": "ai_operational_losses_bhc_research",
+        "case_title": "AI operational-loss research in U.S. BHCs",
+        "public_exposure_amount": null,
+        "failure_type": "Operational-risk exposure growth outpacing controls and governance maturity.",
+        "missing_evidence_artifact": "Pre-escalation decision evidence that can be replayed, challenged, and audited.",
+        "cdag_artifact_fit": [
+          "trace",
+          "replay",
+          "hash-chain",
+          "risk-exposure mapping"
+        ]
+      },
+      {
+        "case_id": "occ_spring_2025_risk_framing",
+        "case_title": "OCC Spring 2025 risk framing",
+        "public_exposure_amount": null,
+        "failure_type": "Risk-governance gaps in model, cybersecurity, and compliance control execution.",
+        "missing_evidence_artifact": "Integrated decision-level audit trail across model outputs, policy thresholds, and review steps.",
+        "cdag_artifact_fit": [
+          "trace",
+          "replay",
+          "hash-chain",
+          "evidence pack",
+          "risk-exposure mapping"
+        ]
+      }
+    ],
+    "limitation": "C-DAG does not prove prevention or savings. It packages replayable evidence and audit-ready artifacts for review."
+  },
+  "holdout_baseline": {
+    "train_rows": 58579,
+    "test_rows": 41421,
+    "test_positives": 201,
+    "auc": 0.573062,
+    "pr_auc": 0.006059,
+    "decision_distribution": {
+      "APPROVE": 36336,
+      "REVIEW": 5085,
+      "DECLINE": 0
+    },
+    "limitation": "Baseline outcome validation, not production model performance."
+  },
+  "todos": [
+    "Record sampled replay audit count consistently across every validation report.",
+    "Record audit-chain record count consistently across every validation report.",
+    "Add measured batch throughput timing.",
+    "Add measured evidence-pack generation timing.",
+    "Add measured validation run duration.",
+    "Parse an FFIEC public record if included in the local public-record corpus."
+  ]
+}
