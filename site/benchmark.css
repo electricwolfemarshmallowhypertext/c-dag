@@ -231,10 +231,88 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   .benchmark-grid,
   .benchmark-proof-grid,
   .benchmark-bento {
     grid-template-columns: 1fr;
+  }
+
+  .benchmark-table-wrap {
+    overflow-x: visible;
+    border: 0;
+  }
+
+  .benchmark-table {
+    min-width: 0;
+  }
+
+  .benchmark-table,
+  .benchmark-table thead,
+  .benchmark-table tbody,
+  .benchmark-table tr,
+  .benchmark-table th,
+  .benchmark-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .benchmark-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .benchmark-table tr {
+    margin-bottom: 0.85rem;
+    border: 1px solid var(--rule);
+    background: var(--panel);
+  }
+
+  .benchmark-table td {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 0.42fr) minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.72rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .benchmark-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .benchmark-table td::before {
+    color: var(--accent-lime);
+    content: "";
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .benchmark-table td:nth-child(1)::before {
+    content: "Lane";
+  }
+
+  .benchmark-table td:nth-child(2)::before {
+    content: "Rows";
+  }
+
+  .benchmark-table td:nth-child(3)::before {
+    content: "Result";
+  }
+
+  .benchmark-table td:nth-child(4)::before {
+    content: "Replay";
+  }
+
+  .benchmark-table td:nth-child(5)::before {
+    content: "Audit-chain";
   }
 }
