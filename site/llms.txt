@@ -1,0 +1,30 @@
+# C-DAG
+
+One-line description: replayable causal audit traces for high-risk financial AI decisions.
+
+Project: C-DAG
+Repo: https://github.com/electricwolfemarshmallowhypertext/c-dag
+Site: https://cdag.quest
+Benchmark: https://cdag.quest/benchmark.html
+DOI: https://doi.org/10.5281/zenodo.19779499
+
+License boundary:
+- Software: source-available under BUSL-1.1.
+- Paper: CC BY 4.0.
+- Commercial production use requires written permission from the licensor.
+
+Safe claims:
+- workflow evidence benchmark
+- public dataset validation
+- replayable evidence
+- audit-ready artifacts
+- 100% success on sampled validation audit records across reported validation runs
+- audit-chain integrity verified across reported validation runs
+
+Boundary:
+- public reference validation only
+- public reference validation only
+- not a legal or regulatory certification
+- not a lending decision system
+- no guaranteed financial outcome
+- no customer-data evaluation

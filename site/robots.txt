@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cdag.quest/sitemap.xml
+
+# AI-readable project summaries:
+# https://cdag.quest/llms.txt
+# https://cdag.quest/llms-full.txt
