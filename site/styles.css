@@ -54,12 +54,17 @@ body {
   padding: 0;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: "Segoe UI", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   line-height: 1.4;
   font-size: 16px;
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -1126,6 +1131,10 @@ a:hover {
 
   .btn {
     width: 100%;
+  }
+
+  .loss-nowrap {
+    white-space: normal;
   }
 }
 
