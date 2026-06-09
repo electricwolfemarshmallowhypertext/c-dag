@@ -45,8 +45,8 @@
   font-size: 0.78rem;
 }
 
-.benchmark-status-spaced {
-  margin-top: 1rem;
+.benchmark-status-card .benchmark-status-spaced {
+  margin-top: 20px;
 }
 
 .benchmark-status-card strong {
@@ -82,7 +82,7 @@
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: clamp(2.7rem, 6vw, 5rem);
   line-height: 0.9;
-  color: var(--accent-lime);
+  color: var(--accent-cyan);
 }
 
 .benchmark-proof span {
@@ -105,7 +105,7 @@
   border: 1px solid var(--rule);
   border-radius: 999px;
   padding: 0.32rem 0.65rem;
-  color: var(--accent-cyan);
+  color: #fff;
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -198,6 +198,14 @@
   margin: 0.9rem 0 0;
   color: var(--muted);
   max-width: 76ch;
+}
+
+.benchmark-loss-source-note {
+  margin-bottom: 20px;
+}
+
+.benchmark-cyan {
+  color: var(--accent-cyan);
 }
 
 .benchmark-actions {
