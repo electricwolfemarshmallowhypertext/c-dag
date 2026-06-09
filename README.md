@@ -1,4 +1,6 @@
-﻿# C-DAG
+﻿![C-DAG feature image](site/cdag-quest-feature.jpg)
+
+# C-DAG
 
 Causal audit traces for high-risk financial AI decisions.
 
@@ -372,3 +374,4 @@ Available commercial paths:
 - **Support boundary:** commercial support can include integration guidance, deployment review, configuration review, audit-output review, and governance documentation support. It does not include legal advice, credit-policy approval, fairness certification, adverse-action review, or certified regulatory compliance.
 
 For commercial licensing, contact: smith@antiparty.co
+
