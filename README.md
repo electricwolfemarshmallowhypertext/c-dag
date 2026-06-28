@@ -1,6 +1,10 @@
+![C-DAG feature image](site/cdag-quest-feature.jpg)
+
 # C-DAG
 
 **Replayable causal audit traces for high-risk AI decisions.**
+
+## What is C-DAG?
 
 C-DAG transforms AI decisions into replayable, inspectable, and verifiable audit artifacts for governance, compliance, and model-risk workflows.
 
@@ -8,7 +12,7 @@ Instead of treating AI output as a black box, C-DAG records how a decision was r
 
 ---
 
-## Why C-DAG?
+## Why does it matter?
 
 High-risk AI systems increasingly require more than a prediction.
 
@@ -41,9 +45,20 @@ Research
 
 https://doi.org/10.5281/zenodo.19779499
 
+C-DAG includes reference validation using public mortgage and complaint datasets including:
+
+* Freddie Mac
+* Fannie Mae
+* HMDA
+* CFPB
+
+The reference implementation demonstrates governance workflows using historical public data.
+
+It is **not** a lending system and **does not** make production credit decisions.
+
 ---
 
-## Example Output
+## Example audit artifact
 
 Each decision produces structured governance artifacts including:
 
@@ -57,20 +72,6 @@ Each decision produces structured governance artifacts including:
 * policy version
 
 These artifacts are designed for engineering, internal audit, compliance, and model-risk review.
-
----
-
-## Capabilities
-
-* Config-driven causal inference
-* Deterministic replay
-* Counterfactual explanations
-* Tamper-evident audit chains
-* Fairness diagnostics
-* Batch processing
-* FastAPI interface
-* CLI interface
-* Evidence-pack export
 
 ---
 
@@ -94,21 +95,6 @@ flowchart LR
     A --> CLI["CLI Surface"]
     RV --> CLI
 ```
-
----
-
-## Public Validation
-
-C-DAG includes reference validation using public mortgage and complaint datasets including:
-
-* Freddie Mac
-* Fannie Mae
-* HMDA
-* CFPB
-
-The reference implementation demonstrates governance workflows using historical public data.
-
-It is **not** a lending system and **does not** make production credit decisions.
 
 ---
 
