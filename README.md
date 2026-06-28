@@ -6,24 +6,7 @@
 
 ## What is C-DAG?
 
-C-DAG transforms AI decisions into replayable, inspectable, and verifiable audit artifacts for governance, compliance, and model-risk workflows.
-
-Instead of treating AI output as a black box, C-DAG records how a decision was reached, allows deterministic replay, generates counterfactual explanations, and produces tamper-evident audit evidence.
-
----
-
-## Why does it matter?
-
-High-risk AI systems increasingly require more than a prediction.
-
-Teams need to answer:
-
-* Why did this decision happen?
-* Would the outcome change if the evidence changed?
-* Can we replay the exact decision months later?
-* Can an auditor independently verify the result?
-
-C-DAG exists to answer those questions.
+C-DAG transforms AI decisions into replayable, inspectable, and verifiable audit artifacts for governance, compliance, and model-risk workflows. It exists because high-risk AI systems increasingly require more than a prediction: teams need to explain why a decision happened, test whether the outcome would change if evidence changed, replay the exact decision months later, and give auditors independently verifiable evidence.
 
 ---
 
@@ -58,23 +41,6 @@ It is **not** a lending system and **does not** make production credit decisions
 
 ---
 
-## Example audit artifact
-
-Each decision produces structured governance artifacts including:
-
-* decision
-* confidence
-* causal pathway
-* counterfactual scenarios
-* replay verification
-* audit integrity
-* model version
-* policy version
-
-These artifacts are designed for engineering, internal audit, compliance, and model-risk review.
-
----
-
 ## Architecture
 
 ```mermaid
@@ -98,6 +64,23 @@ flowchart LR
 
 ---
 
+## Example audit artifact
+
+Each decision produces structured governance artifacts including:
+
+* decision
+* confidence
+* causal pathway
+* counterfactual scenarios
+* replay verification
+* audit integrity
+* model version
+* policy version
+
+These artifacts are designed for engineering, internal audit, compliance, and model-risk review.
+
+---
+
 ## Quick Start
 
 ```bash
@@ -107,6 +90,49 @@ python -m pytest -q
 
 python -m causal_credit_risk.cli --json-only
 ```
+
+---
+
+## API
+
+C-DAG includes a FastAPI surface for internal evaluation and integration testing.
+
+```bash
+uvicorn causal_credit_risk.api:app --reload
+curl -s http://127.0.0.1:8000/healthz
+```
+
+Available routes:
+
+* `GET /healthz`
+* `GET /readyz`
+* `POST /v1/decision`
+* `POST /v1/replay`
+* `POST /v1/batch`
+* `POST /v1/fairness`
+* `POST /v1/fairness/report`
+* `POST /v1/audit-chain/verify`
+
+Auth is intentionally not included in the local package. Apply authentication and authorization at the deployment boundary.
+
+---
+
+## Boundaries
+
+C-DAG is:
+
+* replayable governance infrastructure
+* explainability layer
+* source-available reference implementation
+* public validation workflow for high-risk AI decision auditing
+
+C-DAG is not:
+
+* production lending software
+* regulatory certification
+* legal advice
+* customer credit adjudication
+* a system for making real credit eligibility decisions
 
 ---
 
