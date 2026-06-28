@@ -76,27 +76,24 @@ These artifacts are designed for engineering, internal audit, compliance, and mo
 
 ## Architecture
 
-Model Configuration
-
-![Down arrow](site/chevrons-down.svg)
-
-Inference
-
-![Down arrow](site/chevrons-down.svg)
-
-Policy Evaluation
-
-![Down arrow](site/chevrons-down.svg)
-
-Counterfactual Analysis
-
-![Down arrow](site/chevrons-down.svg)
-
-Replay Verification
-
-![Down arrow](site/chevrons-down.svg)
-
-Audit Artifact
+```mermaid
+flowchart LR
+    C1["Model Configs"] --> ML["Model Loader"]
+    C2["Policy Config"] --> ML
+    ML --> V["Validator"]
+    V --> I["Inference Engine"]
+    I --> P["Policy Layer"]
+    I --> CF["Counterfactual Engine"]
+    P --> A["Audit Generator"]
+    CF --> A
+    A --> RV["Replay Verifier"]
+    A --> BR["Batch Runner"]
+    A --> EX["Audit Export"]
+    RV --> API["API Surface"]
+    BR --> API
+    A --> CLI["CLI Surface"]
+    RV --> CLI
+```
 
 ---
 
