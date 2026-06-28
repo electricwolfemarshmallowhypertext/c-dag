@@ -1,0 +1,71 @@
+{
+  "registry_id": "cdag_control_frameworks",
+  "registry_version": "1.0.0",
+  "frameworks": [
+    {
+      "id": "NIST-AI-RMF",
+      "name": "NIST AI RMF",
+      "version": "1.0",
+      "controls": [
+        {
+          "id": "NIST-AI-RMF-MAP",
+          "title": "Decision evidence traceability",
+          "evidence_fields": ["model_version", "policy_version", "validation_status"]
+        }
+      ]
+    },
+    {
+      "id": "ISO-IEC-42001",
+      "name": "ISO/IEC 42001",
+      "version": "2023",
+      "controls": [
+        {
+          "id": "ISO-42001-EVIDENCE",
+          "title": "AI management system evidence record",
+          "evidence_fields": ["boundary_metadata", "model_lifecycle", "replay_hash"]
+        }
+      ]
+    },
+    {
+      "id": "SR11-7",
+      "name": "SR 11-7 Model Risk Management",
+      "version": "2011",
+      "controls": [
+        {
+          "id": "SR11-7-TRACE",
+          "title": "Model decision trace and replay evidence",
+          "evidence_fields": ["replay_hash", "audit_chain", "model_version"]
+        }
+      ]
+    },
+    {
+      "id": "EU-AI-ACT",
+      "name": "EU AI Act high-risk obligations",
+      "version": "2024",
+      "controls": [
+        {
+          "id": "EUAI-HIGH-RISK-RECORD",
+          "title": "Recordkeeping evidence for high-risk AI review",
+          "evidence_fields": ["input_evidence", "decision", "timestamp_utc", "validation_status"]
+        }
+      ]
+    },
+    {
+      "id": "INTERNAL",
+      "name": "Internal custom controls",
+      "version": "1.0",
+      "controls": [
+        {
+          "id": "INTERNAL-GOV-REVIEW",
+          "title": "Human review workflow metadata",
+          "evidence_fields": ["review_status", "review_history"]
+        },
+        {
+          "id": "INTERNAL-CONTROL-REFERENCES",
+          "title": "Artifact control-reference attachment",
+          "evidence_fields": ["control_references"]
+        }
+      ]
+    }
+  ]
+}

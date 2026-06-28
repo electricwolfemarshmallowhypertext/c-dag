@@ -16,6 +16,8 @@ C-DAG transforms AI decisions into replayable, inspectable, and verifiable audit
 * Deterministic replay validation
 * Counterfactual generation
 * Audit-chain verification
+* Control-framework mapping
+* Compliance-support package export
 * Fairness diagnostics
 * Public benchmark
 * DOI-backed technical paper
@@ -38,6 +40,20 @@ C-DAG includes reference validation using public mortgage and complaint datasets
 The reference implementation demonstrates governance workflows using historical public data.
 
 It is **not** a lending system and **does not** make production credit decisions.
+
+Governance Evidence
+
+✓ Governance artifact schema
+✓ Deterministic replay verification
+✓ Replay hash validation
+✓ Audit-chain verification
+✓ Control-framework mapping
+✓ Compliance-support package export
+✓ Evidence-pack export
+✓ Human review metadata and review history
+✓ Model lifecycle metadata
+✓ Fairness diagnostics
+✓ Passing test suite
 
 ---
 
@@ -69,15 +85,48 @@ flowchart LR
 Each decision produces structured governance artifacts including:
 
 * decision
-* confidence
+* risk probability
 * causal pathway
 * counterfactual scenarios
 * replay verification
+* replay hash
+* audit-chain hash
 * audit integrity
 * model version
 * policy version
+* deployment version
+* validation status
+* control references
+* review status
 
 These artifacts are designed for engineering, internal audit, compliance, and model-risk review.
+
+---
+
+## Governance artifact
+
+C-DAG can emit a schema-backed governance artifact for each decision. The artifact includes model and policy versions, input evidence, inferred nodes, risk probability, decision, causal chain, counterfactuals, replay hash, audit-chain hash, validation status, timestamp, boundary metadata, and optional human review fields.
+
+Governance artifacts can be exported from the CLI, replay-verified, included in evidence packs, and returned by the decision API response.
+
+---
+
+## Compliance-support package
+
+C-DAG produces evidence that supports governance, model risk management, internal audit, and regulatory compliance workflows.
+
+Compliance-support packages include the governance artifact, replay verification, audit-chain verification, fairness report when available, model metadata, policy metadata, control mappings, an evidence manifest, and integrity hashes.
+
+The default control registry maps artifact evidence to NIST AI RMF, ISO/IEC 42001, SR 11-7 Model Risk Management, EU AI Act high-risk obligations, and internal custom controls.
+
+---
+
+## Capabilities
+
+* Governance artifact generation for replayable decision evidence.
+* Deterministic control mapping for configured governance and compliance-support frameworks.
+* Compliance-support package export and import with stable integrity hashes.
+* Review assignment, comments, approval, rejection, escalation, and review history metadata.
 
 ---
 
@@ -112,6 +161,10 @@ Available routes:
 * `POST /v1/fairness`
 * `POST /v1/fairness/report`
 * `POST /v1/audit-chain/verify`
+* `GET /v1/control-frameworks`
+* `GET /v1/control-mappings`
+* `POST /v1/compliance-package`
+* `POST /v1/review`
 
 Auth is intentionally not included in the local package. Apply authentication and authorization at the deployment boundary.
 
@@ -119,20 +172,17 @@ Auth is intentionally not included in the local package. Apply authentication an
 
 ## Boundaries
 
-C-DAG is:
+C-DAG is not a standalone production lending decision engine and does not independently determine consumer credit eligibility. It produces replayable governance evidence for teams evaluating, validating, auditing, or overseeing high-risk credit-decision systems.
 
-* replayable governance infrastructure
-* explainability layer
-* source-available reference implementation
-* public validation workflow for high-risk AI decision auditing
+C-DAG does not:
 
-C-DAG is not:
-
-* production lending software
-* regulatory certification
-* legal advice
-* customer credit adjudication
-* a system for making real credit eligibility decisions
+* serve as standalone production lending adjudication
+* independently determine consumer credit eligibility
+* certify regulatory compliance
+* provide legal advice
+* replace institutional governance programs
+* replace human review or approval
+* guarantee fairness or regulatory acceptance
 
 ---
 
@@ -140,9 +190,17 @@ C-DAG is not:
 
 Technical documentation, architecture, API references, governance workflows, and deployment guidance are available in the `/docs` directory.
 
+Governance artifact: `docs/governance_artifact.md`
+
+Compliance support: `docs/compliance_support.md`
+
+Replay proof: `docs/replay_proof.md`
+
 ---
 
 ## License
+
+Source-available software under BUSL-1.1, not OSI open-source.
 
 Business Source License 1.1
 

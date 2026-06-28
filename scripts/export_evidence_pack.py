@@ -20,6 +20,10 @@ from causal_credit_risk.audit_chain import build_audit_chain_record, verify_audi
 from causal_credit_risk.batch import run_batch_csv
 from causal_credit_risk.cli import run_decision
 from causal_credit_risk.fairness import compute_fairness_report
+from causal_credit_risk.governance import (
+    build_governance_artifact,
+    replay_governance_artifact_payload,
+)
 from causal_credit_risk.model import CausalDAGModel
 from causal_credit_risk.registry import default_model_config_path, default_policy_config_path
 from causal_credit_risk.replay import replay_from_audit_payload
@@ -139,6 +143,14 @@ def export_evidence_pack(
         encoding="utf-8",
     )
 
+    governance_artifact = build_governance_artifact(
+        chain_records[0]["audit_record"],
+        audit_chain_record=chain_records[0],
+        tenant_id=str(chain_records[0].get("tenant_id", "default")),
+    )
+    governance_path = output_dir / "governance_artifact.json"
+    governance_path.write_text(json.dumps(governance_artifact, indent=2), encoding="utf-8")
+
     replay_result = replay_from_audit_payload(
         audit_payload=chain_records[0]["audit_record"],
         model_config_path=model_path,
@@ -147,10 +159,66 @@ def export_evidence_pack(
     replay_path = output_dir / "replay_result.json"
     replay_path.write_text(json.dumps(replay_result, indent=2), encoding="utf-8")
 
+    governance_replay_result = replay_governance_artifact_payload(
+        artifact=governance_artifact,
+        model_config_path=model_path,
+        policy_config_path=policy_path,
+    )
+    governance_replay_path = output_dir / "governance_replay_result.json"
+    governance_replay_path.write_text(
+        json.dumps(governance_replay_result, indent=2),
+        encoding="utf-8",
+    )
+
     model_copy = output_dir / model_path.name
     policy_copy = output_dir / policy_path.name
     shutil.copy2(model_path, model_copy)
     shutil.copy2(policy_path, policy_copy)
+
+    manifest = {
+        "manifest_version": "1.0.0",
+        "pack_type": "cdag_governance_evidence_pack",
+        "contents": [
+            {
+                "path": "audit_chain.json",
+                "description": "Tamper-evident audit-chain records.",
+            },
+            {
+                "path": "audit_chain_verify.json",
+                "description": "Audit-chain verification result.",
+            },
+            {
+                "path": "batch_output.csv",
+                "description": "Batch decision output used for pack diagnostics.",
+            },
+            {
+                "path": "fairness_report.json",
+                "description": "Fairness diagnostics when subgroup data is available.",
+            },
+            {
+                "path": "governance_artifact.json",
+                "description": "Governance artifact for replayable decision review.",
+            },
+            {
+                "path": "governance_replay_result.json",
+                "description": "Replay verification result for governance_artifact.json.",
+            },
+            {
+                "path": "replay_result.json",
+                "description": "Backward-compatible replay result for the source audit record.",
+            },
+            {
+                "path": model_copy.name,
+                "description": "Model configuration copy used for replay.",
+            },
+            {
+                "path": policy_copy.name,
+                "description": "Policy configuration copy used for replay.",
+            },
+        ],
+    }
+    manifest_path = output_dir / "evidence_pack_manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     metadata = {
         "generated_at_utc": datetime.now(tz=timezone.utc).isoformat(timespec="seconds"),
@@ -162,6 +230,9 @@ def export_evidence_pack(
         "audit_chain": str(chain_path),
         "audit_chain_verification": str(chain_verify_path),
         "replay_result": str(replay_path),
+        "governance_artifact": str(governance_path),
+        "governance_replay_result": str(governance_replay_path),
+        "evidence_pack_manifest": str(manifest_path),
         "model_config_copy": str(model_copy),
         "policy_config_copy": str(policy_copy),
     }

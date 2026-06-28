@@ -257,7 +257,7 @@ The package has been validated on public institutional datasets (Freddie Mac, Fa
 * The current release has hard boundaries.  
 * The CPDs are illustrative. They are not learned from validated lending data.  
 * The reference model is not a production credit model.  
-* The package must not be used for real lending decisions or credit eligibility decisions.  
+* The package is not a standalone production lending decision engine and does not independently determine consumer credit eligibility.
 * The system is not proof of EU AI Act compliance.  
 * The fairness diagnostics are not fairness certification.  
 * The package has not been validated on customer data.  

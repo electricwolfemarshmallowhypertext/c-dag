@@ -19,8 +19,14 @@ from causal_credit_risk.audit import build_causal_chain, create_audit_record
 from causal_credit_risk.audit_chain import build_audit_chain_record, verify_audit_chain
 from causal_credit_risk.audit_store import build_audit_store
 from causal_credit_risk.batch import run_batch_csv
+from causal_credit_risk.compliance import export_compliance_package, import_compliance_package
 from causal_credit_risk.counterfactuals import intervention_counterfactual
 from causal_credit_risk.fairness import compute_fairness_report
+from causal_credit_risk.governance import (
+    build_governance_artifact,
+    replay_governance_artifact_payload,
+    replay_governance_artifact_file,
+)
 from causal_credit_risk.inference import ExactInferenceEngine
 from causal_credit_risk.io_utils import read_json_file
 from causal_credit_risk.model import CausalDAGModel, ModelValidationError
@@ -241,6 +247,26 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional path to an existing audit JSON file for deterministic replay.",
     )
     parser.add_argument(
+        "--export-governance-artifact",
+        default=None,
+        help="Optional file path to save a governance evidence artifact for the decision.",
+    )
+    parser.add_argument(
+        "--replay-governance-artifact",
+        default=None,
+        help="Optional path to a governance evidence artifact JSON file for replay verification.",
+    )
+    parser.add_argument(
+        "--export-compliance-package",
+        default=None,
+        help="Optional directory path to export a compliance-support evidence package.",
+    )
+    parser.add_argument(
+        "--import-compliance-package",
+        default=None,
+        help="Optional directory path to verify a restored compliance-support evidence package.",
+    )
+    parser.add_argument(
         "--verify-audit-chain",
         default=None,
         help="Optional path to a JSON list of audit-chain records to verify.",
@@ -325,6 +351,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
             print(json.dumps(result, indent=2))
             return 0 if valid else 1
+
+        if args.import_compliance_package:
+            restored = import_compliance_package(args.import_compliance_package)
+            replay_report = replay_governance_artifact_payload(
+                artifact=restored["governance_artifact"],
+                model_config_path=args.model_config,
+                policy_config_path=args.policy_config,
+            )
+            restored["restore_replay_verification"] = replay_report
+            print(json.dumps(restored, indent=2))
+            return 0 if restored.get("integrity_valid") and replay_report.get("replay_match") else 1
+
+        if args.replay_governance_artifact:
+            replay_report = replay_governance_artifact_file(
+                artifact_path=args.replay_governance_artifact,
+                model_config_path=args.model_config,
+                policy_config_path=args.policy_config,
+            )
+            print(json.dumps(replay_report, indent=2))
+            return 0 if replay_report.get("replay_match") is True else 1
 
         if args.replay_audit:
             replay_report = replay_from_audit_file(
@@ -440,11 +486,27 @@ def main(argv: Sequence[str] | None = None) -> int:
             "audit_hash": chain_record["audit_hash"],
             "tenant_id": chain_record["tenant_id"],
         }
+        governance_artifact = build_governance_artifact(
+            audit.to_dict(),
+            audit_chain_record=chain_record,
+            tenant_id=tenant_id,
+        )
+        payload["governance_artifact"] = governance_artifact
+        if args.export_compliance_package:
+            payload["compliance_package"] = export_compliance_package(
+                output_dir=args.export_compliance_package,
+                governance_artifact=governance_artifact,
+                model_config_path=args.model_config,
+                policy_config_path=args.policy_config,
+            )
         print(json.dumps(payload, indent=2))
 
         if args.audit_output:
             output_path = Path(args.audit_output)
             output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        if args.export_governance_artifact:
+            output_path = Path(args.export_governance_artifact)
+            output_path.write_text(json.dumps(governance_artifact, indent=2), encoding="utf-8")
         if audit_store is not None:
             audit_store.save_audit(payload)
             audit_store.save_chain_record(chain_record)

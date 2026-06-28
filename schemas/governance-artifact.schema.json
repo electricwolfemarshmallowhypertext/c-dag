@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdag.quest/schemas/governance-artifact.schema.json",
+  "title": "C-DAG Governance Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "decision_id",
+    "tenant_id",
+    "model_id",
+    "model_version",
+    "policy_version",
+    "input_evidence",
+    "inferred_nodes",
+    "risk_probability",
+    "decision",
+    "causal_chain",
+    "counterfactuals",
+    "replay_hash",
+    "audit_chain_hash",
+    "audit_chain",
+    "validation_status",
+    "timestamp_utc",
+    "boundary_metadata",
+    "model_lifecycle"
+  ],
+  "properties": {
+    "artifact_type": {
+      "const": "cdag_governance_artifact"
+    },
+    "artifact_version": {
+      "type": "string"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "tenant_id": {
+      "type": "string"
+    },
+    "model_id": {
+      "type": "string"
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "input_evidence": {
+      "type": "object"
+    },
+    "inferred_nodes": {
+      "type": "object"
+    },
+    "risk_probability": {
+      "type": "number"
+    },
+    "decision": {
+      "enum": ["APPROVE", "REVIEW", "DECLINE"]
+    },
+    "causal_chain": {
+      "type": "array"
+    },
+    "counterfactuals": {
+      "type": "array"
+    },
+    "replay_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "audit_chain_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "audit_chain": {
+      "type": "object",
+      "required": ["chain_index", "previous_hash", "tenant_id"],
+      "properties": {
+        "chain_index": {
+          "type": "integer"
+        },
+        "previous_hash": {
+          "type": ["string", "null"]
+        },
+        "tenant_id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "validation_status": {
+      "type": "object"
+    },
+    "timestamp_utc": {
+      "type": "string"
+    },
+    "boundary_metadata": {
+      "type": "object",
+      "required": [
+        "intended_use",
+        "not_production_lending",
+        "not_regulatory_certification",
+        "not_legal_advice",
+        "not_credit_eligibility_decision"
+      ],
+      "properties": {
+        "intended_use": {
+          "type": "string"
+        },
+        "not_production_lending": {
+          "type": "boolean"
+        },
+        "not_regulatory_certification": {
+          "type": "boolean"
+        },
+        "not_legal_advice": {
+          "type": "boolean"
+        },
+        "not_credit_eligibility_decision": {
+          "type": "boolean"
+        },
+        "boundary_statement": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "model_lifecycle": {
+      "type": "object",
+      "required": [
+        "model_version",
+        "policy_version",
+        "deployment_version",
+        "created_timestamp",
+        "superseded_version",
+        "change_reason"
+      ],
+      "properties": {
+        "model_version": {
+          "type": ["string", "null"]
+        },
+        "policy_version": {
+          "type": ["string", "null"]
+        },
+        "deployment_version": {
+          "type": "string"
+        },
+        "created_timestamp": {
+          "type": ["string", "null"]
+        },
+        "superseded_version": {
+          "type": ["string", "null"]
+        },
+        "change_reason": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "control_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "framework_id", "status"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "framework_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "review_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["reviewer_id", "review_status", "review_notes", "reviewed_at"],
+        "properties": {
+          "reviewer_id": {
+            "type": "string"
+          },
+          "review_status": {
+            "enum": ["pending", "approved", "rejected", "escalated"]
+          },
+          "review_notes": {
+            "type": ["string", "null"]
+          },
+          "reviewed_at": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "reviewer_id": {
+      "type": ["string", "null"]
+    },
+    "review_status": {
+      "enum": ["pending", "approved", "rejected", "escalated", null]
+    },
+    "review_notes": {
+      "type": ["string", "null"]
+    },
+    "reviewed_at": {
+      "type": ["string", "null"]
+    }
+  }
+}
