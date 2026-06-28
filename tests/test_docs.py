@@ -11,8 +11,12 @@ def test_readme_contains_required_warning_and_replay_reference() -> None:
     readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     assert "Source-available software under BUSL-1.1" in readme
     assert "not OSI open-source" in readme
-    assert "not for real lending decisions" in readme
-    assert "not for credit eligibility decisions" in readme
+    assert (
+        "C-DAG is not a standalone production lending decision engine and does not "
+        "independently determine consumer credit eligibility. It produces replayable "
+        "governance evidence for teams evaluating, validating, auditing, or overseeing "
+        "high-risk credit-decision systems."
+    ) in readme
     assert "docs/replay_proof.md" in readme
 
 

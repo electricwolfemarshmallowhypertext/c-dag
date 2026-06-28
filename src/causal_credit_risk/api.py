@@ -12,7 +12,10 @@ from causal_credit_risk.audit_chain import build_audit_chain_record, verify_audi
 from causal_credit_risk.audit_store import build_audit_store
 from causal_credit_risk.auth import AuthError, build_auth_provider
 from causal_credit_risk.cli import run_decision
+from causal_credit_risk.compliance import build_compliance_package_payload
+from causal_credit_risk.controls import list_control_frameworks, load_control_registry, map_controls
 from causal_credit_risk.fairness import compute_fairness_report
+from causal_credit_risk.governance import apply_review_event, build_governance_artifact
 from causal_credit_risk.model import CausalDAGModel, ModelValidationError
 from causal_credit_risk.policy import (
     DecisionPolicy,
@@ -123,6 +126,11 @@ def create_app(
                 "audit_hash": chain["audit_hash"],
                 "tenant_id": chain["tenant_id"],
             }
+            payload["governance_artifact"] = build_governance_artifact(
+                audit.to_dict(),
+                audit_chain_record=chain,
+                tenant_id=tenant_id,
+            )
             if audit_store is not None:
                 audit_store.save_audit(payload)
                 audit_store.save_chain_record(chain)
@@ -332,6 +340,88 @@ def create_app(
         x_api_key: str | None = Header(default=None, alias="X-API-Key"),
     ) -> dict[str, Any]:
         return _fairness_handler(payload, x_api_key)
+
+    @app.get("/v1/control-frameworks")
+    def control_frameworks(
+        x_api_key: str | None = Header(default=None, alias="X-API-Key"),
+    ) -> dict[str, Any]:
+        _authorize(x_api_key)
+        registry = load_control_registry()
+        return {
+            "registry_id": registry.get("registry_id"),
+            "registry_version": registry.get("registry_version"),
+            "frameworks": list_control_frameworks(registry),
+        }
+
+    @app.get("/v1/control-mappings")
+    def control_mappings(
+        x_api_key: str | None = Header(default=None, alias="X-API-Key"),
+    ) -> dict[str, Any]:
+        _authorize(x_api_key)
+        return load_control_registry()
+
+    @app.post("/v1/compliance-package")
+    def compliance_package(
+        evidence: dict[str, Any],
+        x_api_key: str | None = Header(default=None, alias="X-API-Key"),
+    ) -> dict[str, Any]:
+        _authorize(x_api_key)
+        tenant_payload = {"tenant_id": evidence.get("tenant_id")} if "tenant_id" in evidence else None
+        tenant_id = _resolve_tenant(tenant_payload)
+        decision_evidence = {k: v for k, v in evidence.items() if k != "tenant_id"}
+        try:
+            audit = run_decision(
+                model_config_path=model_path,
+                policy_config_path=policy_path,
+                evidence=decision_evidence,
+                tenant_id=tenant_id,
+            )
+            audit_payload = audit.to_dict()
+            chain = build_audit_chain_record(
+                audit_payload,
+                chain_index=0,
+                previous_hash=None,
+                tenant_id=tenant_id,
+            )
+            artifact = build_governance_artifact(
+                audit_payload,
+                audit_chain_record=chain,
+                tenant_id=tenant_id,
+            )
+            return build_compliance_package_payload(
+                governance_artifact=artifact,
+                model_config_path=model_path,
+                policy_config_path=policy_path,
+            )
+        except (ValueError, KeyError, ModelValidationError, PolicyValidationError) as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    @app.post("/v1/review")
+    def review(
+        payload: dict[str, Any],
+        x_api_key: str | None = Header(default=None, alias="X-API-Key"),
+    ) -> dict[str, Any]:
+        _authorize(x_api_key)
+        artifact = payload.get("governance_artifact")
+        if not isinstance(artifact, dict):
+            raise HTTPException(status_code=400, detail="governance_artifact must be an object")
+        reviewer_id = payload.get("reviewer_id")
+        review_status = payload.get("review_status")
+        if not isinstance(reviewer_id, str) or not reviewer_id.strip():
+            raise HTTPException(status_code=400, detail="reviewer_id must be a non-empty string")
+        if not isinstance(review_status, str):
+            raise HTTPException(status_code=400, detail="review_status must be a string")
+        try:
+            updated = apply_review_event(
+                artifact,
+                reviewer_id=reviewer_id,
+                review_status=review_status,
+                review_notes=payload.get("review_notes"),
+                reviewed_at=payload.get("reviewed_at"),
+            )
+            return {"governance_artifact": updated, "control_mappings": map_controls(updated)}
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @app.post("/v1/audit-chain/verify")
     def audit_chain_verify(

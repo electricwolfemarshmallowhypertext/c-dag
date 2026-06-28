@@ -4,7 +4,7 @@
 
 This pilot evaluates whether `causal-credit-risk-engine` can support model-risk, compliance, internal audit, or AI governance workflows by producing replayable causal audit artifacts from controlled decision inputs.
 
-The pilot is not a production deployment, credit approval workflow, legal compliance review, or fairness certification. It is a structured evaluation of causal traceability, deterministic replay, audit-chain integrity, subgroup diagnostics, and evidence-pack usefulness.
+The pilot is not a production deployment, credit approval workflow, legal advice, regulatory certification, or fairness certification. It is a structured evaluation of causal traceability, deterministic replay, audit-chain integrity, subgroup diagnostics, and evidence-pack usefulness.
 
 ## Duration
 
