@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -190,6 +190,13 @@
             <h3>Holdout baseline</h3>
             <p>Holdout baseline: real public outcome validation. Signal remains limited and should be treated as baseline governance evidence, not production model performance.</p>
           </article>
+          <article class="benchmark-card">
+            <h3>Surrogate governance</h3>
+            <p><strong>Rows:</strong> <span data-opaque-rows>train 165,297 / test 70,842</span></p>
+            <p><strong>Metrics:</strong> <span data-opaque-metrics>AUC 0.646938 / PR-AUC 0.005352 / Brier 0.002646</span></p>
+            <p><strong>Surrogate:</strong> <span data-opaque-surrogate>high fidelity; counterfactual consistency unstable</span></p>
+            <p><strong>Boundary:</strong> validated surrogate governance evidence, not automatic causal truth.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -244,3 +251,4 @@
   <script src="benchmark.js"></script>
 </body>
 </html>
+

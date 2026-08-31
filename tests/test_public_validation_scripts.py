@@ -118,6 +118,10 @@ def test_prepare_scripts_generate_normalized_outputs() -> None:
         assert len(rows) == 2
         assert rows[0]["tenure"] in {"short", "long"}
         assert rows[0]["utilization"] in {"low", "high"}
+        assert rows[0]["ltv_risk"] in {"standard", "elevated"}
+        assert rows[0]["cltv_risk"] in {"standard", "elevated"}
+        assert rows[0]["dti_risk"] in {"standard", "elevated"}
+        assert rows[0]["fico_risk"] in {"standard", "elevated"}
 
 
 def test_prepare_fannie_single_file_historical_performance_format() -> None:
@@ -193,6 +197,9 @@ def test_prepare_fannie_single_file_historical_performance_format() -> None:
         assert rows[0]["tenure"] in {"short", "long"}
         assert rows[0]["utilization"] in {"low", "high"}
         assert rows[0]["risk"] in {"low_risk", "high_risk"}
+        assert rows[0]["loan_age_risk"] == "seasoned"
+        assert rows[1]["delinquency_history_risk"] == "adverse"
+        assert rows[1]["default_loss_risk"] == "adverse"
         assert rows[1]["risk"] == "high_risk"
 
 

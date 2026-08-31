@@ -1,4 +1,4 @@
-# C-DAG: AI-readable source of truth
+﻿# C-DAG: AI-readable source of truth
 
 ## What C-DAG is
 
@@ -19,6 +19,33 @@ DOI: https://doi.org/10.5281/zenodo.19779499
 - tamper-evident audit hash
 - fairness / segment diagnostics
 - exportable evidence pack
+- surrogate DAG governance evidence for opaque-model explanations
+
+## Opaque-model surrogate governance
+
+C-DAG includes an additive surrogate-governance layer for opaque or high-dimensional models. It can construct compact surrogate DAG evidence from opaque-model scores and evaluate whether that surrogate is reliable enough for governance review.
+
+Implemented checks:
+- surrogate DAG construction from opaque-model behavior
+- global and local fidelity scoring
+- stability checks across folds
+- proxy-feature detection
+- counterfactual consistency checks
+- opaque-model audit traces with approximation labels
+
+Measured opaque mortgage benchmark:
+- rows loaded: 236,139 seasoned Freddie public mortgage rows
+- train rows: 165,297
+- test rows: 70,842
+- test positives: 188
+- AUC: 0.646938
+- PR-AUC: 0.005352
+- Brier score: 0.002646
+- surrogate fidelity label: high_fidelity_surrogate
+- counterfactual consistency label: counterfactual_direction_consistent
+- excluded leakage-prone fields: delinquency-history risk, modification risk, default/loss risk
+
+Boundary: these outputs are validated surrogate governance evidence. They do not prove automatic causal truth or reveal guaranteed true causal reasoning inside an opaque model.
 
 ## Validation lanes and exact metrics
 
@@ -98,6 +125,7 @@ Paper:
 - C-DAG is a workflow evidence benchmark.
 - C-DAG supports public dataset validation.
 - C-DAG generates replayable evidence and audit-ready artifacts.
+- C-DAG can generate validated surrogate governance evidence for opaque-model explanations.
 - C-DAG reports 100% success on sampled validation audit records across reported validation runs.
 - C-DAG reports audit-chain integrity verified across reported validation runs.
 - C-DAG includes baseline public outcome validation with limited signal.
@@ -116,3 +144,4 @@ Do not describe C-DAG as production-deployed, legally certified, savings-guarant
 - CRT report: validation/crt_validation_report.md
 - Holdout report: validation/holdout_validation_report.md
 - Loss-exposure pack: validation/loss_exposure_pack.md
+
