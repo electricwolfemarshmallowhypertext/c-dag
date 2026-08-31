@@ -48,6 +48,15 @@ from causal_credit_risk.schemas import (
     ModelConfig,
     PolicyConfig,
 )
+from causal_credit_risk.surrogate import (
+    CounterfactualProbe,
+    construct_surrogate_dag,
+    build_opaque_model_audit_trace,
+    detect_proxy_features,
+    evaluate_counterfactual_consistency,
+    evaluate_surrogate_fidelity,
+    evaluate_surrogate_stability,
+)
 from causal_credit_risk.tenancy import SingleTenantResolver, TenantIdResolver
 from causal_credit_risk.visualization import to_dot
 
@@ -56,6 +65,7 @@ __all__ = [
     "ApiKeyAuthProvider",
     "CausalDAGModel",
     "CounterfactualResult",
+    "CounterfactualProbe",
     "CsvCPDEstimator",
     "DecisionPolicy",
     "ExactInferenceEngine",
@@ -72,6 +82,7 @@ __all__ = [
     "SingleTenantResolver",
     "TenantIdResolver",
     "build_audit_chain_record",
+    "build_opaque_model_audit_trace",
     "build_causal_chain",
     "build_compliance_package_payload",
     "build_governance_artifact",
@@ -80,6 +91,11 @@ __all__ = [
     "compute_fairness_report",
     "create_audit_record",
     "export_compliance_package",
+    "construct_surrogate_dag",
+    "detect_proxy_features",
+    "evaluate_counterfactual_consistency",
+    "evaluate_surrogate_fidelity",
+    "evaluate_surrogate_stability",
     "build_draft_model_config",
     "import_compliance_package",
     "intervention_counterfactual",
@@ -95,3 +111,4 @@ __all__ = [
     "verify_audit_chain",
     "verify_audit_hash",
 ]
+

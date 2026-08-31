@@ -1,4 +1,4 @@
-# C-DAG
+﻿# C-DAG
 
 One-line description: replayable causal audit traces for high-risk financial AI decisions.
 
@@ -18,13 +18,16 @@ Safe claims:
 - public dataset validation
 - replayable evidence
 - audit-ready artifacts
+- validated surrogate governance evidence
+- real opaque mortgage benchmark: AUC 0.646938, PR-AUC 0.005352, Brier 0.002646
 - 100% success on sampled validation audit records across reported validation runs
 - audit-chain integrity verified across reported validation runs
 
 Boundary:
 - public reference validation only
-- public reference validation only
 - not a legal or regulatory certification
 - not a lending decision system
 - no guaranteed financial outcome
 - no customer-data evaluation
+- surrogate DAGs require fidelity, stability, proxy, and counterfactual-consistency checks
+

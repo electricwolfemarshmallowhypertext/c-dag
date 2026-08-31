@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   "use strict";
 
   var METRICS_URL = "../validation/benchmark_metrics.json";
@@ -117,6 +117,15 @@
       auc: 0.573062,
       pr_auc: 0.006059,
       decision_distribution: { APPROVE: 36336, REVIEW: 5085, DECLINE: 0 }
+    },
+    opaque_model_surrogate_benchmark: {
+      train_rows: 165297,
+      test_rows: 70842,
+      auc: 0.646938,
+      pr_auc: 0.005352,
+      brier_score: 0.002646,
+      surrogate_fidelity_label: "high_fidelity_surrogate",
+      counterfactual_consistency_label: "counterfactual_direction_consistent"
     }
   };
 
@@ -223,6 +232,12 @@
     setText("[data-holdout-positives]", formatNumber(metrics.holdout_baseline.test_positives));
     setText("[data-holdout-metrics]", "AUC " + metrics.holdout_baseline.auc.toFixed(6) + " / PR-AUC " + metrics.holdout_baseline.pr_auc.toFixed(6));
     setText("[data-holdout-distribution]", distributionText(metrics.holdout_baseline.decision_distribution));
+    if (metrics.opaque_model_surrogate_benchmark) {
+      var opaque = metrics.opaque_model_surrogate_benchmark;
+      setText("[data-opaque-rows]", "train " + formatNumber(opaque.train_rows) + " / test " + formatNumber(opaque.test_rows));
+      setText("[data-opaque-metrics]", "AUC " + opaque.auc.toFixed(6) + " / PR-AUC " + opaque.pr_auc.toFixed(6) + " / Brier " + opaque.brier_score.toFixed(6));
+      setText("[data-opaque-surrogate]", opaque.surrogate_fidelity_label + "; " + opaque.counterfactual_consistency_label);
+    }
   }
 
   function loadMetrics() {
@@ -250,3 +265,4 @@
     loadMetrics();
   }
 })();
+

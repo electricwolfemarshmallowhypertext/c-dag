@@ -214,6 +214,36 @@
     },
     "limitation": "Baseline outcome validation, not production model performance."
   },
+  "opaque_model_surrogate_benchmark": {
+    "source_report": "validation/opaque_mortgage_benchmark_report.md",
+    "rows_loaded": 236139,
+    "train_rows": 165297,
+    "test_rows": 70842,
+    "test_positives": 188,
+    "prevalence": 0.002654,
+    "opaque_model_type": "deterministic_stump_ensemble",
+    "features_used": [
+      "ltv_risk",
+      "cltv_risk",
+      "dti_risk",
+      "fico_risk",
+      "loan_age_risk",
+      "occupancy_risk",
+      "loan_purpose_risk",
+      "property_type_risk"
+    ],
+    "excluded_leakage_features": [
+      "delinquency_history_risk",
+      "modification_risk",
+      "default_loss_risk"
+    ],
+    "auc": 0.646938,
+    "pr_auc": 0.005352,
+    "brier_score": 0.002646,
+    "surrogate_fidelity_label": "high_fidelity_surrogate",
+    "counterfactual_consistency_label": "counterfactual_direction_consistent",
+    "limitation": "Validated surrogate governance evidence, not automatic causal truth or production predictive performance."
+  },
   "todos": [
     "Record sampled replay audit count consistently across every validation report.",
     "Record audit-chain record count consistently across every validation report.",
@@ -223,3 +253,4 @@
     "Parse an FFIEC public record if included in the local public-record corpus."
   ]
 }
+

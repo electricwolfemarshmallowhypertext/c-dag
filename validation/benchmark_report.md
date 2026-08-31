@@ -1,4 +1,4 @@
-# C-DAG Benchmark / Evidence Dashboard Report
+﻿# C-DAG Benchmark / Evidence Dashboard Report
 
 Generated: 2026-06-09
 
@@ -87,6 +87,33 @@ Known missing measurements:
 - Add measured evidence-pack generation timing.
 - Add measured validation run duration.
 
+## Opaque-model surrogate benchmark
+
+Measured opaque mortgage benchmark:
+
+- source report: `validation/opaque_mortgage_benchmark_report.md`
+- rows loaded: `236,139`
+- train rows: `165,297`
+- test rows: `70,842`
+- test positives: `188`
+- test prevalence: `0.004633`
+- opaque model type: deterministic stump ensemble
+- AUC: `0.646938`
+- PR-AUC: `0.005352`
+- Brier score: `0.002646`
+- surrogate fidelity label: `high_fidelity_surrogate`
+- counterfactual consistency label: `counterfactual_direction_consistent`
+
+Leakage-prone fields excluded from opaque prediction:
+
+- delinquency-history risk
+- modification risk
+- default/loss risk
+
+Boundary:
+
+This is validated surrogate governance evidence. It does not prove automatic causal truth or production predictive performance.
+
 ## Loss exposure mapping
 
 Parsed public-record pack:
@@ -140,3 +167,4 @@ Dashboard page:
 - Add measured evidence-pack generation timing.
 - Add measured validation run duration.
 - Parse an FFIEC public record if included in the local public-record corpus.
+
